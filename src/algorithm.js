@@ -27,7 +27,6 @@ let findClosestPair = (pointElements, pointsCoordinates) => {
     pointElements.slice(),
     "y"
   );
-  console.log(eY);
   let n = pointsCoordinates.length;
 
   // Initialize the start coordinate with the lowest Y value and end Coordinate with Highest Y value for proper visualization.
