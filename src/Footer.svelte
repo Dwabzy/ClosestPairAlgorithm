@@ -33,6 +33,8 @@
 
       --> errorTop stores an integer value that is -100 by default, This is used to animate the error message dropping down on to the screen. It
       is set to *75* when an error message is to be displayed with a transition of 1s.
+
+      -->
   */
   var displayControls = false;
   var errorMessage;

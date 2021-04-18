@@ -19,6 +19,9 @@
   let frames = [];
   var canvas;
 
+  // "hasStarted" is set to true when the start button is clicked. false when reset or at before clicking start button
+  var hasStarted = false;
+
   // Called when the "canvas" event is dispatched from Canvas.svelte.
   function setCanvas(event) {
     canvas = event.detail;
@@ -41,6 +44,7 @@
 
   // Called when the "start" event is dispatched from "Footer.svelte"
   function startAlgorithm() {
+    hasStarted = true;
     Algorithm.findClosestPair(pointElements, pointsCoordinates);
     frames = Algorithm.getFrames();
   }
@@ -495,6 +499,7 @@
   function reset() {
     stopAnimation = true;
     isPlaying = false;
+    hasStarted = false;
 
     for (let i = 0; i < pointElements.length; i++) canvas.remove(pointElements[i]);
     for (let i = 0; i < currentDistanceLineObjects.length; i++)
@@ -564,7 +569,7 @@
   }
 </script>
 
-<Canvas on:createPoint={addPoints} on:canvas={setCanvas} />
+<Canvas on:createPoint={addPoints} on:canvas={setCanvas} {hasStarted} />
 <Footer
   on:start={startAlgorithm}
   on:play={playOrPause}
