@@ -34604,7 +34604,7 @@ var app = (function () {
     function create_each_block(ctx) {
     	let div1;
     	let div0;
-    	let t0_value = /*distanceBox*/ ctx[31].distance.toFixed(2) + "";
+    	let t0_value = (/*distanceBox*/ ctx[31].distance / 10).toFixed(2) + "";
     	let t0;
     	let t1;
     	let div1_class_value;
@@ -34633,7 +34633,7 @@ var app = (function () {
     			append_dev(div1, t1);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*distanceBoxes*/ 1 && t0_value !== (t0_value = /*distanceBox*/ ctx[31].distance.toFixed(2) + "")) set_data_dev(t0, t0_value);
+    			if (dirty[0] & /*distanceBoxes*/ 1 && t0_value !== (t0_value = (/*distanceBox*/ ctx[31].distance / 10).toFixed(2) + "")) set_data_dev(t0, t0_value);
 
     			if (dirty[0] & /*distanceBoxes*/ 1 && div1_class_value !== (div1_class_value = "" + (null_to_empty(/*distanceBox*/ ctx[31].visibility === "visible"
     			? "distance-container visibile"

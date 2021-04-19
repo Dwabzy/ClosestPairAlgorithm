@@ -595,7 +595,7 @@
     style="top:{distanceBox.top + 10 + 'px'}; left:{distanceBox.left + 'px'};"
   >
     <div class="distance">
-      {distanceBox.distance.toFixed(2)}
+      {(distanceBox.distance / 10).toFixed(2)}
     </div>
   </div>
 {/each}
