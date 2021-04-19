@@ -34596,15 +34596,15 @@ var app = (function () {
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[30] = list[i];
+    	child_ctx[31] = list[i];
     	return child_ctx;
     }
 
-    // (586:0) {#each distanceBoxes as distanceBox}
+    // (590:0) {#each distanceBoxes as distanceBox}
     function create_each_block(ctx) {
     	let div1;
     	let div0;
-    	let t0_value = /*distanceBox*/ ctx[30].distance.toFixed(2) + "";
+    	let t0_value = /*distanceBox*/ ctx[31].distance.toFixed(2) + "";
     	let t0;
     	let t1;
     	let div1_class_value;
@@ -34616,15 +34616,15 @@ var app = (function () {
     			t0 = text(t0_value);
     			t1 = space();
     			attr_dev(div0, "class", "distance svelte-17de1c3");
-    			add_location(div0, file, 592, 4, 22754);
+    			add_location(div0, file, 596, 4, 22854);
 
-    			attr_dev(div1, "class", div1_class_value = "" + (null_to_empty(/*distanceBox*/ ctx[30].visibility === "visible"
+    			attr_dev(div1, "class", div1_class_value = "" + (null_to_empty(/*distanceBox*/ ctx[31].visibility === "visible"
     			? "distance-container visibile"
     			: "distance-container hidden") + " svelte-17de1c3"));
 
-    			set_style(div1, "top", /*distanceBox*/ ctx[30].top + 10 + "px");
-    			set_style(div1, "left", /*distanceBox*/ ctx[30].left + "px");
-    			add_location(div1, file, 586, 2, 22539);
+    			set_style(div1, "top", /*distanceBox*/ ctx[31].top + 10 + "px");
+    			set_style(div1, "left", /*distanceBox*/ ctx[31].left + "px");
+    			add_location(div1, file, 590, 2, 22639);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -34633,20 +34633,20 @@ var app = (function () {
     			append_dev(div1, t1);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*distanceBoxes*/ 1 && t0_value !== (t0_value = /*distanceBox*/ ctx[30].distance.toFixed(2) + "")) set_data_dev(t0, t0_value);
+    			if (dirty[0] & /*distanceBoxes*/ 1 && t0_value !== (t0_value = /*distanceBox*/ ctx[31].distance.toFixed(2) + "")) set_data_dev(t0, t0_value);
 
-    			if (dirty[0] & /*distanceBoxes*/ 1 && div1_class_value !== (div1_class_value = "" + (null_to_empty(/*distanceBox*/ ctx[30].visibility === "visible"
+    			if (dirty[0] & /*distanceBoxes*/ 1 && div1_class_value !== (div1_class_value = "" + (null_to_empty(/*distanceBox*/ ctx[31].visibility === "visible"
     			? "distance-container visibile"
     			: "distance-container hidden") + " svelte-17de1c3"))) {
     				attr_dev(div1, "class", div1_class_value);
     			}
 
     			if (dirty[0] & /*distanceBoxes*/ 1) {
-    				set_style(div1, "top", /*distanceBox*/ ctx[30].top + 10 + "px");
+    				set_style(div1, "top", /*distanceBox*/ ctx[31].top + 10 + "px");
     			}
 
     			if (dirty[0] & /*distanceBoxes*/ 1) {
-    				set_style(div1, "left", /*distanceBox*/ ctx[30].left + "px");
+    				set_style(div1, "left", /*distanceBox*/ ctx[31].left + "px");
     			}
     		},
     		d: function destroy(detaching) {
@@ -34658,7 +34658,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(586:0) {#each distanceBoxes as distanceBox}",
+    		source: "(590:0) {#each distanceBoxes as distanceBox}",
     		ctx
     	});
 
@@ -34911,7 +34911,7 @@ var app = (function () {
     			let direction = event.detail;
 
     			// Sets duration to 0, so that when the skipping frames, the animation is faster than normal.
-    			$$invalidate(13, duration = 0);
+    			duration = 0;
 
     			if (direction === "forward") {
     				$$invalidate(5, currentFrame += 1);
@@ -35005,7 +35005,7 @@ var app = (function () {
     		stopAnimation = false;
 
     		// Duration is hardcoded to 2000 here, Might change to a user set value in the future.
-    		$$invalidate(13, duration = 2000);
+    		duration = 2000;
 
     		for (; currentFrame < frames.length; ) {
     			if (!isPlaying) {
@@ -35317,6 +35317,11 @@ var app = (function () {
     		}
     	};
 
+    	async function setVisibility(index) {
+    		await sleep(duration);
+    		if (distanceBoxes[index]) $$invalidate(0, distanceBoxes[index].visibility = "visible", distanceBoxes);
+    	}
+
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
@@ -35357,7 +35362,8 @@ var app = (function () {
     		sleep,
     		createLine,
     		animate,
-    		setAttributes
+    		setAttributes,
+    		setVisibility
     	});
 
     	$$self.$inject_state = $$props => {
@@ -35368,7 +35374,7 @@ var app = (function () {
     		if ("hasStarted" in $$props) $$invalidate(3, hasStarted = $$props.hasStarted);
     		if ("isPlaying" in $$props) $$invalidate(4, isPlaying = $$props.isPlaying);
     		if ("currentFrame" in $$props) $$invalidate(5, currentFrame = $$props.currentFrame);
-    		if ("duration" in $$props) $$invalidate(13, duration = $$props.duration);
+    		if ("duration" in $$props) duration = $$props.duration;
     		if ("history" in $$props) history = $$props.history;
     		if ("distanceBoxes" in $$props) $$invalidate(0, distanceBoxes = $$props.distanceBoxes);
     		if ("currentDistanceLineObjects" in $$props) currentDistanceLineObjects = $$props.currentDistanceLineObjects;
@@ -35384,21 +35390,18 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty[0] & /*distanceBoxes, duration*/ 8193) {
+    		if ($$self.$$.dirty[0] & /*distanceBoxes*/ 1) {
     			/*
       The distance boxes that are added to the DOM are hidden at first. Then after "duration" ms, The distance boxes are made visible. 
       It is done here, Since this function is called reactively.
     */
     			{
     				// Timeout function to display the box with distance only after the line is drawn on the canvas.
-    				setTimeout(
-    					() => {
-    						if (distanceBoxes.length >= 1) {
-    							$$invalidate(0, distanceBoxes[distanceBoxes.length - 1].visibility = "visible", distanceBoxes);
-    						}
-    					},
-    					duration
-    				);
+    				let index = distanceBoxes.length - 1;
+
+    				if (distanceBoxes.length >= 1) {
+    					setVisibility(index);
+    				}
     			}
     		}
     	};
@@ -35416,8 +35419,7 @@ var app = (function () {
     		playOrPause,
     		changeFrame,
     		restartAnimation,
-    		reset,
-    		duration
+    		reset
     	];
     }
 

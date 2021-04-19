@@ -561,11 +561,15 @@
   */
   $: {
     // Timeout function to display the box with distance only after the line is drawn on the canvas.
-    setTimeout(() => {
-      if (distanceBoxes.length >= 1) {
-        distanceBoxes[distanceBoxes.length - 1].visibility = "visible";
-      }
-    }, duration);
+    let index = distanceBoxes.length - 1;
+    if (distanceBoxes.length >= 1) {
+      setVisibility(index);
+    }
+  }
+
+  async function setVisibility(index) {
+    await sleep(duration);
+    if (distanceBoxes[index]) distanceBoxes[index].visibility = "visible";
   }
 </script>
 
