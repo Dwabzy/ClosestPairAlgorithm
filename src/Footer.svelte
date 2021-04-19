@@ -292,7 +292,10 @@
     align-items: center;
 
     font-family: cursive;
-    font-size: 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
   }
 
   .footer {

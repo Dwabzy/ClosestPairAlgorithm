@@ -33724,27 +33724,27 @@ var app = (function () {
     			t9 = text(t9_value);
     			t10 = text(" / ");
     			t11 = text(/*noOfFrames*/ ctx[2]);
-    			attr_dev(div0, "class", "spacer svelte-1ltq7gn");
+    			attr_dev(div0, "class", "spacer svelte-hh661z");
     			add_location(div0, file$1, 164, 4, 6699);
     			attr_dev(button0, "id", "restart-button");
-    			attr_dev(button0, "class", "rect-btn svelte-1ltq7gn");
+    			attr_dev(button0, "class", "rect-btn svelte-hh661z");
     			add_location(button0, file$1, 165, 4, 6727);
     			button1.disabled = /*disablePrev*/ ctx[7];
-    			attr_dev(button1, "class", "control svelte-1ltq7gn");
+    			attr_dev(button1, "class", "control svelte-hh661z");
     			add_location(button1, file$1, 166, 4, 6815);
-    			attr_dev(button2, "class", "control svelte-1ltq7gn");
+    			attr_dev(button2, "class", "control svelte-hh661z");
     			attr_dev(button2, "id", "play");
     			add_location(button2, file$1, 169, 4, 6944);
     			button3.disabled = /*disableNext*/ ctx[6];
-    			attr_dev(button3, "class", "control svelte-1ltq7gn");
+    			attr_dev(button3, "class", "control svelte-hh661z");
     			add_location(button3, file$1, 176, 4, 7110);
     			attr_dev(button4, "id", "reset-button");
-    			attr_dev(button4, "class", "rect-btn svelte-1ltq7gn");
+    			attr_dev(button4, "class", "rect-btn svelte-hh661z");
     			add_location(button4, file$1, 179, 4, 7238);
-    			attr_dev(div1, "class", "spacer svelte-1ltq7gn");
+    			attr_dev(div1, "class", "spacer svelte-hh661z");
     			add_location(div1, file$1, 180, 4, 7318);
     			attr_dev(div2, "id", "frame-counter");
-    			attr_dev(div2, "class", "frame-counter svelte-1ltq7gn");
+    			attr_dev(div2, "class", "frame-counter svelte-hh661z");
     			add_location(div2, file$1, 183, 4, 7426);
     		},
     		m: function mount(target, anchor) {
@@ -33879,7 +33879,7 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Start";
     			attr_dev(button, "id", "start-button");
-    			attr_dev(button, "class", "rect-btn svelte-1ltq7gn");
+    			attr_dev(button, "class", "rect-btn svelte-hh661z");
     			add_location(button, file$1, 161, 4, 6575);
     		},
     		m: function mount(target, anchor) {
@@ -34022,14 +34022,15 @@ var app = (function () {
     			t3 = space();
     			div2 = element("div");
     			if_block.c();
-    			attr_dev(div0, "class", "error-message svelte-1ltq7gn");
+    			attr_dev(div0, "class", "error-message svelte-hh661z");
     			set_style(div0, "top", /*errorTop*/ ctx[5] + "px");
     			add_location(div0, file$1, 152, 0, 6208);
+    			attr_dev(h1, "class", "svelte-hh661z");
     			add_location(h1, file$1, 156, 2, 6324);
     			attr_dev(div1, "id", " title");
-    			attr_dev(div1, "class", "x-axis svelte-1ltq7gn");
+    			attr_dev(div1, "class", "x-axis svelte-hh661z");
     			add_location(div1, file$1, 155, 0, 6288);
-    			attr_dev(div2, "class", "footer svelte-1ltq7gn");
+    			attr_dev(div2, "class", "footer svelte-hh661z");
     			add_location(div2, file$1, 158, 0, 6388);
     		},
     		l: function claim(nodes) {
