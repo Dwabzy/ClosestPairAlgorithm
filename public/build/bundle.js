@@ -32913,20 +32913,20 @@ var app = (function () {
 
     function get_each_context$1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[8] = list[i];
+    	child_ctx[10] = list[i];
     	return child_ctx;
     }
 
     function get_each_context_1(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[8] = list[i];
+    	child_ctx[10] = list[i];
     	return child_ctx;
     }
 
-    // (127:0) {#each verticalRuling as ruling}
+    // (129:0) {#each verticalRuling as ruling}
     function create_each_block_1(ctx) {
     	let span;
-    	let t_value = /*ruling*/ ctx[8].number + "";
+    	let t_value = /*ruling*/ ctx[10].number + "";
     	let t;
 
     	const block = {
@@ -32934,23 +32934,23 @@ var app = (function () {
     			span = element("span");
     			t = text(t_value);
     			attr_dev(span, "class", "number svelte-aaxc4c");
-    			set_style(span, "top", /*ruling*/ ctx[8].top + "px");
-    			set_style(span, "left", /*ruling*/ ctx[8].left + "px");
-    			add_location(span, file$6, 127, 2, 4398);
+    			set_style(span, "top", /*ruling*/ ctx[10].top + "px");
+    			set_style(span, "left", /*ruling*/ ctx[10].left + "px");
+    			add_location(span, file$6, 129, 2, 4509);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
     			append_dev(span, t);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*verticalRuling*/ 4 && t_value !== (t_value = /*ruling*/ ctx[8].number + "")) set_data_dev(t, t_value);
+    			if (dirty & /*verticalRuling*/ 4 && t_value !== (t_value = /*ruling*/ ctx[10].number + "")) set_data_dev(t, t_value);
 
     			if (dirty & /*verticalRuling*/ 4) {
-    				set_style(span, "top", /*ruling*/ ctx[8].top + "px");
+    				set_style(span, "top", /*ruling*/ ctx[10].top + "px");
     			}
 
     			if (dirty & /*verticalRuling*/ 4) {
-    				set_style(span, "left", /*ruling*/ ctx[8].left + "px");
+    				set_style(span, "left", /*ruling*/ ctx[10].left + "px");
     			}
     		},
     		d: function destroy(detaching) {
@@ -32962,17 +32962,17 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(127:0) {#each verticalRuling as ruling}",
+    		source: "(129:0) {#each verticalRuling as ruling}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (131:0) {#each horizontalRuling as ruling}
+    // (133:0) {#each horizontalRuling as ruling}
     function create_each_block$1(ctx) {
     	let span;
-    	let t_value = /*ruling*/ ctx[8].number + "";
+    	let t_value = /*ruling*/ ctx[10].number + "";
     	let t;
 
     	const block = {
@@ -32980,23 +32980,23 @@ var app = (function () {
     			span = element("span");
     			t = text(t_value);
     			attr_dev(span, "class", "number svelte-aaxc4c");
-    			set_style(span, "bottom", /*ruling*/ ctx[8].bottom + "px");
-    			set_style(span, "left", /*ruling*/ ctx[8].left + "px");
-    			add_location(span, file$6, 131, 2, 4605);
+    			set_style(span, "bottom", /*ruling*/ ctx[10].bottom + "px");
+    			set_style(span, "left", /*ruling*/ ctx[10].left + "px");
+    			add_location(span, file$6, 133, 2, 4716);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
     			append_dev(span, t);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty & /*horizontalRuling*/ 2 && t_value !== (t_value = /*ruling*/ ctx[8].number + "")) set_data_dev(t, t_value);
+    			if (dirty & /*horizontalRuling*/ 2 && t_value !== (t_value = /*ruling*/ ctx[10].number + "")) set_data_dev(t, t_value);
 
     			if (dirty & /*horizontalRuling*/ 2) {
-    				set_style(span, "bottom", /*ruling*/ ctx[8].bottom + "px");
+    				set_style(span, "bottom", /*ruling*/ ctx[10].bottom + "px");
     			}
 
     			if (dirty & /*horizontalRuling*/ 2) {
-    				set_style(span, "left", /*ruling*/ ctx[8].left + "px");
+    				set_style(span, "left", /*ruling*/ ctx[10].left + "px");
     			}
     		},
     		d: function destroy(detaching) {
@@ -33008,7 +33008,7 @@ var app = (function () {
     		block,
     		id: create_each_block$1.name,
     		type: "each",
-    		source: "(131:0) {#each horizontalRuling as ruling}",
+    		source: "(133:0) {#each horizontalRuling as ruling}",
     		ctx
     	});
 
@@ -33061,11 +33061,11 @@ var app = (function () {
     			attr_dev(canvas_1, "width", "500");
     			attr_dev(canvas_1, "height", "300");
     			attr_dev(canvas_1, "class", "svelte-aaxc4c");
-    			add_location(canvas_1, file$6, 124, 0, 4292);
+    			add_location(canvas_1, file$6, 126, 0, 4403);
     			attr_dev(span, "class", "number svelte-aaxc4c");
     			set_style(span, "bottom", "-30px");
     			set_style(span, "left", "-25px");
-    			add_location(span, file$6, 129, 0, 4502);
+    			add_location(span, file$6, 131, 0, 4613);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -33175,6 +33175,11 @@ var app = (function () {
     	let horizontalRuling = [];
 
     	let verticalRuling = [];
+
+    	// calculate the height and width of the canvas based on the size of the window.
+    	let canvasHeight = window.innerHeight - 200 - window.innerHeight % 100;
+
+    	let canvasWidth = window.innerWidth - 200 - window.innerWidth % 100;
     	let { hasStarted = false } = $$props;
 
     	/*
@@ -33184,8 +33189,6 @@ var app = (function () {
     	onMount(() => {
     		canvas = new fabric_1.fabric.Canvas(canv);
     		canvas.selectable = false;
-    		let canvasHeight = window.innerHeight - 200 - window.innerHeight % 100;
-    		let canvasWidth = window.innerWidth - 200 - window.innerWidth % 100;
     		canvas.setHeight(canvasHeight + 11);
     		canvas.setWidth(canvasWidth + 11);
 
@@ -33267,7 +33270,7 @@ var app = (function () {
     	});
 
     	function createPoint(x, y) {
-    		if (!hasStarted) {
+    		if (!hasStarted && x > 0 && y < canvasHeight) {
     			// Check to see if point already exists.
     			var point = new fabric_1.fabric.Circle({
     					radius: 5,
@@ -33312,6 +33315,8 @@ var app = (function () {
     		canvas,
     		horizontalRuling,
     		verticalRuling,
+    		canvasHeight,
+    		canvasWidth,
     		hasStarted,
     		createPoint
     	});
@@ -33321,6 +33326,8 @@ var app = (function () {
     		if ("canvas" in $$props) canvas = $$props.canvas;
     		if ("horizontalRuling" in $$props) $$invalidate(1, horizontalRuling = $$props.horizontalRuling);
     		if ("verticalRuling" in $$props) $$invalidate(2, verticalRuling = $$props.verticalRuling);
+    		if ("canvasHeight" in $$props) canvasHeight = $$props.canvasHeight;
+    		if ("canvasWidth" in $$props) canvasWidth = $$props.canvasWidth;
     		if ("hasStarted" in $$props) $$invalidate(3, hasStarted = $$props.hasStarted);
     	};
 
@@ -34823,7 +34830,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (625:0) {#each distanceBoxes as distanceBox}
+    // (610:4) {#each distanceBoxes as distanceBox}
     function create_each_block(ctx) {
     	let div1;
     	let div0;
@@ -34839,7 +34846,8 @@ var app = (function () {
     			t0 = text(t0_value);
     			t1 = space();
     			attr_dev(div0, "class", "distance svelte-1d893xz");
-    			add_location(div0, file, 631, 4, 24135);
+    			add_location(div0, file, 617, 8, 23881);
+    			attr_dev(div1, "draggable", "true");
 
     			attr_dev(div1, "class", div1_class_value = "" + (null_to_empty(/*distanceBox*/ ctx[33].visibility === "visible"
     			? "distance-container visibile"
@@ -34847,7 +34855,7 @@ var app = (function () {
 
     			set_style(div1, "top", /*distanceBox*/ ctx[33].top + 10 + "px");
     			set_style(div1, "left", /*distanceBox*/ ctx[33].left + "px");
-    			add_location(div1, file, 625, 2, 23920);
+    			add_location(div1, file, 610, 6, 23617);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -34881,7 +34889,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(625:0) {#each distanceBoxes as distanceBox}",
+    		source: "(610:4) {#each distanceBoxes as distanceBox}",
     		ctx
     	});
 
@@ -34896,10 +34904,9 @@ var app = (function () {
     	let div1;
     	let canvas_1;
     	let t2;
+    	let t3;
     	let div2;
     	let footer;
-    	let t3;
-    	let each_1_anchor;
     	let current;
 
     	canvas_1 = new Canvas({
@@ -34909,6 +34916,13 @@ var app = (function () {
 
     	canvas_1.$on("createPoint", /*addPoints*/ ctx[7]);
     	canvas_1.$on("canvas", /*setCanvas*/ ctx[6]);
+    	let each_value = /*distanceBoxes*/ ctx[0];
+    	validate_each_argument(each_value);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < each_value.length; i += 1) {
+    		each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
+    	}
 
     	footer = new Footer({
     			props: {
@@ -34925,13 +34939,6 @@ var app = (function () {
     	footer.$on("move", /*changeFrame*/ ctx[10]);
     	footer.$on("restart", /*restartAnimation*/ ctx[11]);
     	footer.$on("reset", /*reset*/ ctx[12]);
-    	let each_value = /*distanceBoxes*/ ctx[0];
-    	validate_each_argument(each_value);
-    	let each_blocks = [];
-
-    	for (let i = 0; i < each_value.length; i += 1) {
-    		each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
-    	}
 
     	const block = {
     		c: function create() {
@@ -34943,26 +34950,25 @@ var app = (function () {
     			div1 = element("div");
     			create_component(canvas_1.$$.fragment);
     			t2 = space();
-    			div2 = element("div");
-    			create_component(footer.$$.fragment);
-    			t3 = space();
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
 
-    			each_1_anchor = empty();
+    			t3 = space();
+    			div2 = element("div");
+    			create_component(footer.$$.fragment);
     			attr_dev(h1, "class", "svelte-1d893xz");
-    			add_location(h1, file, 603, 4, 23323);
+    			add_location(h1, file, 604, 4, 23348);
     			attr_dev(div0, "id", " title");
     			attr_dev(div0, "class", "title svelte-1d893xz");
-    			add_location(div0, file, 602, 2, 23287);
+    			add_location(div0, file, 603, 2, 23312);
     			attr_dev(div1, "class", "canvas-box svelte-1d893xz");
-    			add_location(div1, file, 605, 2, 23389);
+    			add_location(div1, file, 606, 2, 23414);
     			attr_dev(div2, "class", "footer-container svelte-1d893xz");
-    			add_location(div2, file, 608, 2, 23502);
+    			add_location(div2, file, 623, 2, 24006);
     			attr_dev(div3, "class", "main-container svelte-1d893xz");
-    			add_location(div3, file, 601, 0, 23256);
+    			add_location(div3, file, 602, 0, 23281);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -34974,28 +34980,21 @@ var app = (function () {
     			append_dev(div3, t1);
     			append_dev(div3, div1);
     			mount_component(canvas_1, div1, null);
-    			append_dev(div3, t2);
-    			append_dev(div3, div2);
-    			mount_component(footer, div2, null);
-    			insert_dev(target, t3, anchor);
+    			append_dev(div1, t2);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
-    				each_blocks[i].m(target, anchor);
+    				each_blocks[i].m(div1, null);
     			}
 
-    			insert_dev(target, each_1_anchor, anchor);
+    			append_dev(div3, t3);
+    			append_dev(div3, div2);
+    			mount_component(footer, div2, null);
     			current = true;
     		},
     		p: function update(ctx, dirty) {
     			const canvas_1_changes = {};
     			if (dirty[0] & /*hasStarted*/ 8) canvas_1_changes.hasStarted = /*hasStarted*/ ctx[3];
     			canvas_1.$set(canvas_1_changes);
-    			const footer_changes = {};
-    			if (dirty[0] & /*isPlaying*/ 16) footer_changes.isPlaying = /*isPlaying*/ ctx[4];
-    			if (dirty[0] & /*pointsCoordinates*/ 2) footer_changes.pointsCoordinates = /*pointsCoordinates*/ ctx[1];
-    			if (dirty[0] & /*currentFrame*/ 32) footer_changes.currentFrame = /*currentFrame*/ ctx[5] + 1;
-    			if (dirty[0] & /*frames*/ 4) footer_changes.noOfFrames = /*frames*/ ctx[2].length;
-    			footer.$set(footer_changes);
 
     			if (dirty[0] & /*distanceBoxes*/ 1) {
     				each_value = /*distanceBoxes*/ ctx[0];
@@ -35010,7 +35009,7 @@ var app = (function () {
     					} else {
     						each_blocks[i] = create_each_block(child_ctx);
     						each_blocks[i].c();
-    						each_blocks[i].m(each_1_anchor.parentNode, each_1_anchor);
+    						each_blocks[i].m(div1, null);
     					}
     				}
 
@@ -35020,6 +35019,13 @@ var app = (function () {
 
     				each_blocks.length = each_value.length;
     			}
+
+    			const footer_changes = {};
+    			if (dirty[0] & /*isPlaying*/ 16) footer_changes.isPlaying = /*isPlaying*/ ctx[4];
+    			if (dirty[0] & /*pointsCoordinates*/ 2) footer_changes.pointsCoordinates = /*pointsCoordinates*/ ctx[1];
+    			if (dirty[0] & /*currentFrame*/ 32) footer_changes.currentFrame = /*currentFrame*/ ctx[5] + 1;
+    			if (dirty[0] & /*frames*/ 4) footer_changes.noOfFrames = /*frames*/ ctx[2].length;
+    			footer.$set(footer_changes);
     		},
     		i: function intro(local) {
     			if (current) return;
@@ -35035,10 +35041,8 @@ var app = (function () {
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div3);
     			destroy_component(canvas_1);
-    			destroy_component(footer);
-    			if (detaching) detach_dev(t3);
     			destroy_each(each_blocks, detaching);
-    			if (detaching) detach_dev(each_1_anchor);
+    			destroy_component(footer);
     		}
     	};
 
@@ -35325,6 +35329,7 @@ var app = (function () {
     		let midX = (x1 + x2) / 2;
 
     		let midY = (y1 + y2) / 2;
+    		console.log(p1, p2);
 
     		let distanceBox = {
     			left: midX,

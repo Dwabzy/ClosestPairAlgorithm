@@ -12,6 +12,10 @@
   let horizontalRuling = [];
   let verticalRuling = [];
 
+  // calculate the height and width of the canvas based on the size of the window.
+  let canvasHeight = window.innerHeight - 200 - (window.innerHeight % 100);
+  let canvasWidth = window.innerWidth - 200 - (window.innerWidth % 100);
+
   // Passed as prop from App.svelte. If it is true, do not add any more points.
   export let hasStarted = false;
 
@@ -22,9 +26,6 @@
   onMount(() => {
     canvas = new fabric.Canvas(canv);
     canvas.selectable = false;
-
-    let canvasHeight = window.innerHeight - 200 - (window.innerHeight % 100);
-    let canvasWidth = window.innerWidth - 200 - (window.innerWidth % 100);
 
     canvas.setHeight(canvasHeight + 11);
     canvas.setWidth(canvasWidth + 11);
@@ -96,13 +97,14 @@
 
       let top = boundingRectangle.top;
       let y = Math.ceil(options.e.clientY - (options.e.clientY % 10) - (top - (top % 10)) - 5);
+
       console.log(x, y);
       createPoint(x, y);
     });
   });
 
   function createPoint(x, y) {
-    if (!hasStarted) {
+    if (!hasStarted && x > 0 && y < canvasHeight) {
       // Check to see if point already exists.
 
       var point = new fabric.Circle({

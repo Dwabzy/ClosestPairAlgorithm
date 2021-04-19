@@ -284,6 +284,7 @@
     // Add Distance Box
     let midX = (x1 + x2) / 2;
     let midY = (y1 + y2) / 2;
+    console.log(p1, p2);
     let distanceBox = {
       left: midX,
       top: midY,
@@ -605,6 +606,20 @@
   </div>
   <div class="canvas-box">
     <Canvas on:createPoint={addPoints} on:canvas={setCanvas} {hasStarted} />
+    <!-- Displays all distance boxes, iteratively -->
+    {#each distanceBoxes as distanceBox}
+      <div
+        draggable="true"
+        class={distanceBox.visibility === "visible"
+          ? "distance-container visibile"
+          : "distance-container hidden"}
+        style="top:{distanceBox.top + 10 + 'px'}; left:{distanceBox.left + 'px'};"
+      >
+        <div class="distance">
+          {(distanceBox.distance / 10).toFixed(2)}
+        </div>
+      </div>
+    {/each}
   </div>
   <div class="footer-container">
     <Footer
@@ -620,20 +635,6 @@
     />
   </div>
 </div>
-
-<!-- Displays all distance boxes, iteratively -->
-{#each distanceBoxes as distanceBox}
-  <div
-    class={distanceBox.visibility === "visible"
-      ? "distance-container visibile"
-      : "distance-container hidden"}
-    style="top:{distanceBox.top + 10 + 'px'}; left:{distanceBox.left + 'px'};"
-  >
-    <div class="distance">
-      {(distanceBox.distance / 10).toFixed(2)}
-    </div>
-  </div>
-{/each}
 
 <style type="text/scss">
   .main-container {
