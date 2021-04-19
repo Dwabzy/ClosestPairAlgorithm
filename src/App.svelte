@@ -581,7 +581,7 @@
   on:restart={restartAnimation}
   on:reset={reset}
   {isPlaying}
-  {pointsCoordinates}
+  {pointsCoordinates} 
   currentFrame={currentFrame + 1}
   noOfFrames={frames.length}
 />

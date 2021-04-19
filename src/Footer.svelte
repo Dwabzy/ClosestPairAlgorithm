@@ -291,7 +291,7 @@
     justify-content: center;
     align-items: center;
 
-    font-family: cursive;
+    font-family: Arial, Helvetica, sans-serif;
   }
 
   h1 {

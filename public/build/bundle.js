@@ -33724,27 +33724,27 @@ var app = (function () {
     			t9 = text(t9_value);
     			t10 = text(" / ");
     			t11 = text(/*noOfFrames*/ ctx[2]);
-    			attr_dev(div0, "class", "spacer svelte-hh661z");
+    			attr_dev(div0, "class", "spacer svelte-rkfebr");
     			add_location(div0, file$1, 164, 4, 6699);
     			attr_dev(button0, "id", "restart-button");
-    			attr_dev(button0, "class", "rect-btn svelte-hh661z");
+    			attr_dev(button0, "class", "rect-btn svelte-rkfebr");
     			add_location(button0, file$1, 165, 4, 6727);
     			button1.disabled = /*disablePrev*/ ctx[7];
-    			attr_dev(button1, "class", "control svelte-hh661z");
+    			attr_dev(button1, "class", "control svelte-rkfebr");
     			add_location(button1, file$1, 166, 4, 6815);
-    			attr_dev(button2, "class", "control svelte-hh661z");
+    			attr_dev(button2, "class", "control svelte-rkfebr");
     			attr_dev(button2, "id", "play");
     			add_location(button2, file$1, 169, 4, 6944);
     			button3.disabled = /*disableNext*/ ctx[6];
-    			attr_dev(button3, "class", "control svelte-hh661z");
+    			attr_dev(button3, "class", "control svelte-rkfebr");
     			add_location(button3, file$1, 176, 4, 7110);
     			attr_dev(button4, "id", "reset-button");
-    			attr_dev(button4, "class", "rect-btn svelte-hh661z");
+    			attr_dev(button4, "class", "rect-btn svelte-rkfebr");
     			add_location(button4, file$1, 179, 4, 7238);
-    			attr_dev(div1, "class", "spacer svelte-hh661z");
+    			attr_dev(div1, "class", "spacer svelte-rkfebr");
     			add_location(div1, file$1, 180, 4, 7318);
     			attr_dev(div2, "id", "frame-counter");
-    			attr_dev(div2, "class", "frame-counter svelte-hh661z");
+    			attr_dev(div2, "class", "frame-counter svelte-rkfebr");
     			add_location(div2, file$1, 183, 4, 7426);
     		},
     		m: function mount(target, anchor) {
@@ -33879,7 +33879,7 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Start";
     			attr_dev(button, "id", "start-button");
-    			attr_dev(button, "class", "rect-btn svelte-hh661z");
+    			attr_dev(button, "class", "rect-btn svelte-rkfebr");
     			add_location(button, file$1, 161, 4, 6575);
     		},
     		m: function mount(target, anchor) {
@@ -34022,15 +34022,15 @@ var app = (function () {
     			t3 = space();
     			div2 = element("div");
     			if_block.c();
-    			attr_dev(div0, "class", "error-message svelte-hh661z");
+    			attr_dev(div0, "class", "error-message svelte-rkfebr");
     			set_style(div0, "top", /*errorTop*/ ctx[5] + "px");
     			add_location(div0, file$1, 152, 0, 6208);
-    			attr_dev(h1, "class", "svelte-hh661z");
+    			attr_dev(h1, "class", "svelte-rkfebr");
     			add_location(h1, file$1, 156, 2, 6324);
     			attr_dev(div1, "id", " title");
-    			attr_dev(div1, "class", "x-axis svelte-hh661z");
+    			attr_dev(div1, "class", "x-axis svelte-rkfebr");
     			add_location(div1, file$1, 155, 0, 6288);
-    			attr_dev(div2, "class", "footer svelte-hh661z");
+    			attr_dev(div2, "class", "footer svelte-rkfebr");
     			add_location(div2, file$1, 158, 0, 6388);
     		},
     		l: function claim(nodes) {
@@ -34616,7 +34616,7 @@ var app = (function () {
     			t0 = text(t0_value);
     			t1 = space();
     			attr_dev(div0, "class", "distance svelte-17de1c3");
-    			add_location(div0, file, 596, 4, 22854);
+    			add_location(div0, file, 596, 4, 22855);
 
     			attr_dev(div1, "class", div1_class_value = "" + (null_to_empty(/*distanceBox*/ ctx[31].visibility === "visible"
     			? "distance-container visibile"
@@ -34624,7 +34624,7 @@ var app = (function () {
 
     			set_style(div1, "top", /*distanceBox*/ ctx[31].top + 10 + "px");
     			set_style(div1, "left", /*distanceBox*/ ctx[31].left + "px");
-    			add_location(div1, file, 590, 2, 22639);
+    			add_location(div1, file, 590, 2, 22640);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
