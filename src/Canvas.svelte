@@ -80,14 +80,13 @@
       
       --> The "createPoint" event is handled in the parent component (App.svelte)
     */
-    alert("fabric.isTouchSupported=" + fabric.isTouchSupported);
     canvas.on("mouse:down", function (options) {
       let x = options.e.clientX - (options.e.clientX % 10);
       let y = options.e.clientY - (options.e.clientY % 10);
       createPoint(x, y);
     });
 
-    canvas.on("touch:longpress", function (options) {
+    canvas.on("touch:gesture", function (options) {
       let x = options.e.clientX - (options.e.clientX % 10);
       let y = options.e.clientY - (options.e.clientY % 10);
       createPoint(x, y);
@@ -122,5 +121,6 @@
 <style>
   canvas {
     cursor: default !important;
+    z-index: 10;
   }
 </style>

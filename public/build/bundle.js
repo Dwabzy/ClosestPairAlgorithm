@@ -32917,8 +32917,8 @@ var app = (function () {
     			canvas_1 = element("canvas");
     			attr_dev(canvas_1, "width", "500");
     			attr_dev(canvas_1, "height", "300");
-    			attr_dev(canvas_1, "class", "svelte-121ucc");
-    			add_location(canvas_1, file$6, 119, 0, 4034);
+    			attr_dev(canvas_1, "class", "svelte-1e33vqv");
+    			add_location(canvas_1, file$6, 118, 0, 3966);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -33031,15 +33031,13 @@ var app = (function () {
       
       --> The "createPoint" event is handled in the parent component (App.svelte)
     */
-    		alert("fabric.isTouchSupported=" + fabric_1.fabric.isTouchSupported);
-
     		canvas.on("mouse:down", function (options) {
     			let x = options.e.clientX - options.e.clientX % 10;
     			let y = options.e.clientY - options.e.clientY % 10;
     			createPoint(x, y);
     		});
 
-    		canvas.on("touch:longpress", function (options) {
+    		canvas.on("touch:gesture", function (options) {
     			let x = options.e.clientX - options.e.clientX % 10;
     			let y = options.e.clientY - options.e.clientY % 10;
     			createPoint(x, y);
