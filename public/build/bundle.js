@@ -34615,12 +34615,12 @@ var app = (function () {
     			div0 = element("div");
     			t0 = text(t0_value);
     			t1 = space();
-    			attr_dev(div0, "class", "distance svelte-1s3on34");
+    			attr_dev(div0, "class", "distance svelte-17de1c3");
     			add_location(div0, file, 592, 4, 22754);
 
     			attr_dev(div1, "class", div1_class_value = "" + (null_to_empty(/*distanceBox*/ ctx[30].visibility === "visible"
     			? "distance-container visibile"
-    			: "distance-container hidden") + " svelte-1s3on34"));
+    			: "distance-container hidden") + " svelte-17de1c3"));
 
     			set_style(div1, "top", /*distanceBox*/ ctx[30].top + 10 + "px");
     			set_style(div1, "left", /*distanceBox*/ ctx[30].left + "px");
@@ -34637,7 +34637,7 @@ var app = (function () {
 
     			if (dirty[0] & /*distanceBoxes*/ 1 && div1_class_value !== (div1_class_value = "" + (null_to_empty(/*distanceBox*/ ctx[30].visibility === "visible"
     			? "distance-container visibile"
-    			: "distance-container hidden") + " svelte-1s3on34"))) {
+    			: "distance-container hidden") + " svelte-17de1c3"))) {
     				attr_dev(div1, "class", div1_class_value);
     			}
 

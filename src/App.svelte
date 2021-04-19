@@ -614,5 +614,7 @@
 
     border: 1px solid #4f8ff0;
     box-shadow: 0 1px 5px #2961b5;
+
+    z-index: 50;
   }
 </style>
