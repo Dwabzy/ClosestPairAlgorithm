@@ -282,6 +282,7 @@
     width: 100%;
 
     background: white;
+    margin: 0 10px;
     margin-top: 1px;
 
     z-index: 5;
@@ -291,6 +292,7 @@
     align-items: center;
 
     font-family: cursive;
+    font-size: 1rem;
   }
 
   .footer {
