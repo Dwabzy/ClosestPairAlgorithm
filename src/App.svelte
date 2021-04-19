@@ -599,18 +599,27 @@
   }
 </script>
 
-<Canvas on:createPoint={addPoints} on:canvas={setCanvas} {hasStarted} />
-<Footer
-  on:start={startAlgorithm}
-  on:play={playOrPause}
-  on:move={changeFrame}
-  on:restart={restartAnimation}
-  on:reset={reset}
-  {isPlaying}
-  {pointsCoordinates}
-  currentFrame={currentFrame + 1}
-  noOfFrames={frames.length}
-/>
+<div class="main-container">
+  <div id=" title" class="title">
+    <h1>Closest Pair Algorithm ( Divide and Conquer )</h1>
+  </div>
+  <div class="canvas-box">
+    <Canvas on:createPoint={addPoints} on:canvas={setCanvas} {hasStarted} />
+  </div>
+  <div class="footer-container">
+    <Footer
+      on:start={startAlgorithm}
+      on:play={playOrPause}
+      on:move={changeFrame}
+      on:restart={restartAnimation}
+      on:reset={reset}
+      {isPlaying}
+      {pointsCoordinates}
+      currentFrame={currentFrame + 1}
+      noOfFrames={frames.length}
+    />
+  </div>
+</div>
 
 <!-- Displays all distance boxes, iteratively -->
 {#each distanceBoxes as distanceBox}
@@ -627,6 +636,44 @@
 {/each}
 
 <style type="text/scss">
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    height: 100vh;
+  }
+
+  .canvas-box {
+    position: relative;
+    margin: 0 auto;
+  }
+
+  .footer-container {
+    justify-self: end;
+  }
+
+  .title {
+    height: 75px;
+    width: 100%;
+
+    background: white;
+    box-shadow: 0px 1px 4px hsl(0, 0%, 50%);
+    z-index: 5;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+  }
+
+  h1 {
+    padding: 0 10px;
+    font-size: 2rem;
+    font-family: cursive;
+  }
   .distance-container {
     position: absolute;
   }

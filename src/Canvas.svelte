@@ -8,6 +8,10 @@
   let canv;
   let canvas;
 
+  //Arrays to store the positions of ruling numbers
+  let horizontalRuling = [];
+  let verticalRuling = [];
+
   // Passed as prop from App.svelte. If it is true, do not add any more points.
   export let hasStarted = false;
 
@@ -18,59 +22,62 @@
   onMount(() => {
     canvas = new fabric.Canvas(canv);
     canvas.selectable = false;
-    canvas.setHeight(window.innerHeight - 175);
-    canvas.setWidth(window.innerWidth);
+
+    let canvasHeight = window.innerHeight - 200 - (window.innerHeight % 100);
+    let canvasWidth = window.innerWidth - 200 - (window.innerWidth % 100);
+
+    canvas.setHeight(canvasHeight + 1);
+    canvas.setWidth(canvasWidth + 1);
 
     // Send canvas to Parent ( App.svelte ), because the "canvas" variable is needed to add objects and to animate the objects.
     dispatch("canvas", canvas);
 
     // Draw the graph with ruling
+
+    console.log(canvasWidth, canvasHeight);
+    // Hardcoded based on chrome, May not be the same in other browsers.
+    let widthOfEachCharacter = 8.625;
     // Horizontal Lines
-    for (let i = window.innerHeight - 200; i >= 0; i -= 10) {
-      if ((i % 100) - (window.innerHeight % 100) == 0) {
-        var text = new fabric.Text((window.innerHeight - i - 200) / 10 + "", {
-          left: 70,
-          top: i - 7,
-          fontSize: 15,
-        });
-        canvas.add(text);
-      }
-      var line = new fabric.Line([100, i, window.innerWidth, i], {
-        stroke: (i % 100) - (window.innerHeight % 100) == 0 ? "gray" : "lightgray",
+    for (let i = 0; i <= canvasHeight + 10; i += 10) {
+      var line = new fabric.Line([0, i, window.innerWidth - 100, i], {
+        stroke: (i % 100) - (canvasHeight % 100) == 0 ? "gray" : "lightgray",
         selectable: false,
         hasControls: false,
       });
       canvas.add(line);
-    }
-    // Vertical lines
-    for (let i = window.innerWidth; i >= 0; i -= 100) {
-      if ((i % 100) - (window.innerWidth % 100) == 0 && i - (window.innerWidth % 100) != 0) {
-        let left = 93 + i - (window.innerWidth % 100);
-        if (i >= 2000) left = 90 + i - (window.innerWidth % 100);
-        var text = new fabric.Text((i - (window.innerWidth % 100)) / 10 + "", {
-          left: left,
-          top: window.innerHeight - 195,
-          fontSize: 15,
-          selectable: false,
-          hasControls: false,
-        });
-        canvas.add(text);
+
+      // Add Top and Left
+      if (i % 100 === 0 && i > 0) {
+        let yStart = canvasHeight;
+        // Subtracting 10.5, to Centre the number vertically along with it's line.
+        let top = yStart - i - 10.5;
+        let left;
+        let number = i / 10;
+
+        let noOfCharacters = Math.max(Math.floor(Math.log10(number)), 0);
+
+        // Centre all the numbers
+        left = -25 - (noOfCharacters * widthOfEachCharacter) / 2;
+        verticalRuling = [...verticalRuling, { top, left, number }];
       }
-      for (let j = 0; j <= 100; j += 10) {
-        var line = new fabric.Line(
-          [
-            i + j + 100 - (window.innerWidth % 100),
-            0,
-            i + j + 100 - (window.innerWidth % 100),
-            window.innerHeight - 200,
-          ],
-          {
-            stroke: ((i + j) % 100) - (window.innerWidth % 100) == 0 ? "gray" : "lightgray",
-            selectable: false,
-            hasControls: false,
-          }
-        );
-        canvas.add(line);
+    }
+
+    // Vertical lines
+    for (let i = 0; i <= canvasWidth; i += 10) {
+      var line = new fabric.Line([i, 0, i, canvasHeight], {
+        stroke: (i % 100) - (canvasWidth % 100) == 0 ? "gray" : "lightgray",
+        selectable: false,
+        hasControls: false,
+      });
+      canvas.add(line);
+
+      if (i % 100 === 0 && i > 0) {
+        let xStart = 0;
+        let bottom = -30;
+        let left = xStart + i - 10.5;
+        let number = i / 10;
+
+        horizontalRuling = [...horizontalRuling, { bottom, left, number }];
       }
     }
 
@@ -110,9 +117,22 @@
   }
 </script>
 
-<canvas bind:this={canv} width="500" height="300" />
+<canvas bind:this={canv} width="500" height="300"> Hello </canvas>
+
+{#each verticalRuling as ruling}
+  <span class="number" style="top:{ruling.top}px; left:{ruling.left}px;">{ruling.number}</span>
+{/each}
+<span class="number" style="bottom:-30px; left:-25px;">0</span>
+{#each horizontalRuling as ruling}
+  <span class="number" style="bottom:{ruling.bottom}px; left:{ruling.left}px;">{ruling.number}</span
+  >
+{/each}
 
 <style>
+  .number {
+    position: absolute;
+    font-size: 16px;
+  }
   canvas {
     cursor: default !important;
     z-index: 10;
