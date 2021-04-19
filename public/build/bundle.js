@@ -34402,6 +34402,7 @@ var app = (function () {
     };
 
     let findClosestPair = (pointElements, pointsCoordinates) => {
+      frameNumber = 0;
       frames = [];
       let { points: sortedX, elements: eX } = insertionSort(
         pointsCoordinates.slice(),
@@ -34600,7 +34601,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (590:0) {#each distanceBoxes as distanceBox}
+    // (591:0) {#each distanceBoxes as distanceBox}
     function create_each_block(ctx) {
     	let div1;
     	let div0;
@@ -34616,7 +34617,7 @@ var app = (function () {
     			t0 = text(t0_value);
     			t1 = space();
     			attr_dev(div0, "class", "distance svelte-17de1c3");
-    			add_location(div0, file, 596, 4, 22890);
+    			add_location(div0, file, 597, 4, 22915);
 
     			attr_dev(div1, "class", div1_class_value = "" + (null_to_empty(/*distanceBox*/ ctx[31].visibility === "visible"
     			? "distance-container visibile"
@@ -34624,7 +34625,7 @@ var app = (function () {
 
     			set_style(div1, "top", /*distanceBox*/ ctx[31].top + 10 + "px");
     			set_style(div1, "left", /*distanceBox*/ ctx[31].left + "px");
-    			add_location(div1, file, 590, 2, 22675);
+    			add_location(div1, file, 591, 2, 22700);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -34658,7 +34659,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(590:0) {#each distanceBoxes as distanceBox}",
+    		source: "(591:0) {#each distanceBoxes as distanceBox}",
     		ctx
     	});
 
@@ -35289,7 +35290,7 @@ var app = (function () {
 
     	// Helper function to create a new Fabric Line Object.
     	let createLine = (x1, y1, x2, y2, stroke, strokeWidth) => {
-    		var line = new fabric.Line([x1, y1, x2, y2], { stroke, strokeWidth });
+    		var line = new fabric.Line([x1, y1, x2, y2], { stroke, strokeWidth, selectable: false });
     		return line;
     	};
 

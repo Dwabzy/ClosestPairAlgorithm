@@ -527,6 +527,7 @@
     var line = new fabric.Line([x1, y1, x2, y2], {
       stroke: stroke,
       strokeWidth: strokeWidth,
+      selectable: false,
     });
     return line;
   };

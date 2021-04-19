@@ -16,6 +16,7 @@ let getFrames = () => {
 };
 
 let findClosestPair = (pointElements, pointsCoordinates) => {
+  frameNumber = 0;
   frames = [];
   let { points: sortedX, elements: eX } = insertionSort(
     pointsCoordinates.slice(),
