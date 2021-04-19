@@ -34616,7 +34616,7 @@ var app = (function () {
     			t0 = text(t0_value);
     			t1 = space();
     			attr_dev(div0, "class", "distance svelte-17de1c3");
-    			add_location(div0, file, 596, 4, 22855);
+    			add_location(div0, file, 596, 4, 22890);
 
     			attr_dev(div1, "class", div1_class_value = "" + (null_to_empty(/*distanceBox*/ ctx[31].visibility === "visible"
     			? "distance-container visibile"
@@ -34624,7 +34624,7 @@ var app = (function () {
 
     			set_style(div1, "top", /*distanceBox*/ ctx[31].top + 10 + "px");
     			set_style(div1, "left", /*distanceBox*/ ctx[31].left + "px");
-    			add_location(div1, file, 590, 2, 22640);
+    			add_location(div1, file, 590, 2, 22675);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -35057,7 +35057,7 @@ var app = (function () {
     		setAttributes(elements, { fill: "blue", radius: 6 });
 
     		// Add line to canvas.
-    		let distanceLine = createLine(x1, y1, x1, y1, "black", 1);
+    		let distanceLine = createLine(x1, y1 + 2.5, x1, y1 + 2.5, "black", 1);
 
     		canvas.add(distanceLine);
 
@@ -35090,7 +35090,7 @@ var app = (function () {
     		currentDistanceLineObjects.push(bruteForceObject);
     		history.push(bruteForceObject);
     		await sleep(duration / 2);
-    		await animate(canvas, distanceLine, { x2, y2 }, duration / 2);
+    		await animate(canvas, distanceLine, { x2, y2: y2 + 2.5 }, duration / 2);
 
     		// Revert highlighted points to original state.
     		setAttributes(elements, { fill: "black", radius: 5 });
@@ -35187,7 +35187,7 @@ var app = (function () {
 
     		if (hasCloserPointsInStrip) {
     			// Add shorter line
-    			let shorterLine = createLine(x1, y1, x1, y1, "black", 1);
+    			let shorterLine = createLine(x1, y1 + 2.5, x1, y1 + 2.5, "black", 1);
 
     			canvas.add(shorterLine);
 
@@ -35229,7 +35229,7 @@ var app = (function () {
     			};
 
     			currentDistanceLineObjects.push(stripObject);
-    			await animate(canvas, shorterLine, { x2, y2 }, duration);
+    			await animate(canvas, shorterLine, { x2, y2: y2 + 2.5 }, duration);
     		} else {
     			history.push(stripClosestObject);
     		}

@@ -275,7 +275,7 @@
     setAttributes(elements, { fill: "blue", radius: 6 });
 
     // Add line to canvas.
-    let distanceLine = createLine(x1, y1, x1, y1, "black", 1);
+    let distanceLine = createLine(x1, y1 + 2.5, x1, y1 + 2.5, "black", 1);
     canvas.add(distanceLine);
     // Add Distance Box
     let midX = (x1 + x2) / 2;
@@ -303,7 +303,7 @@
     history.push(bruteForceObject);
 
     await sleep(duration / 2);
-    await animate(canvas, distanceLine, { x2: x2, y2: y2 }, duration / 2);
+    await animate(canvas, distanceLine, { x2: x2, y2: y2 + 2.5 }, duration / 2);
 
     // Revert highlighted points to original state.
     setAttributes(elements, { fill: "black", radius: 5 });
@@ -409,7 +409,7 @@
 
     if (hasCloserPointsInStrip) {
       // Add shorter line
-      let shorterLine = createLine(x1, y1, x1, y1, "black", 1);
+      let shorterLine = createLine(x1, y1 + 2.5, x1, y1 + 2.5, "black", 1);
       canvas.add(shorterLine);
 
       // Add distance box for shorter line
@@ -450,7 +450,7 @@
 
       currentDistanceLineObjects.push(stripObject);
 
-      await animate(canvas, shorterLine, { x2: x2, y2: y2 }, duration);
+      await animate(canvas, shorterLine, { x2: x2, y2: y2 + 2.5 }, duration);
     } else {
       history.push(stripClosestObject);
     }
@@ -581,7 +581,7 @@
   on:restart={restartAnimation}
   on:reset={reset}
   {isPlaying}
-  {pointsCoordinates} 
+  {pointsCoordinates}
   currentFrame={currentFrame + 1}
   noOfFrames={frames.length}
 />
