@@ -26,20 +26,19 @@
     let canvasHeight = window.innerHeight - 200 - (window.innerHeight % 100);
     let canvasWidth = window.innerWidth - 200 - (window.innerWidth % 100);
 
-    canvas.setHeight(canvasHeight + 1);
-    canvas.setWidth(canvasWidth + 1);
+    canvas.setHeight(canvasHeight + 11);
+    canvas.setWidth(canvasWidth + 11);
 
     // Send canvas to Parent ( App.svelte ), because the "canvas" variable is needed to add objects and to animate the objects.
     dispatch("canvas", canvas);
 
-    // Draw the graph with ruling
-
-    console.log(canvasWidth, canvasHeight);
     // Hardcoded based on chrome, May not be the same in other browsers.
     let widthOfEachCharacter = 8.625;
+
+    // Draw the graph with ruling
     // Horizontal Lines
-    for (let i = 0; i <= canvasHeight + 10; i += 10) {
-      var line = new fabric.Line([0, i, window.innerWidth - 100, i], {
+    for (let i = 0; i <= canvasHeight; i += 10) {
+      var line = new fabric.Line([5, i + 5, canvasWidth + 5, i + 5], {
         stroke: (i % 100) - (canvasHeight % 100) == 0 ? "gray" : "lightgray",
         selectable: false,
         hasControls: false,
@@ -64,7 +63,7 @@
 
     // Vertical lines
     for (let i = 0; i <= canvasWidth; i += 10) {
-      var line = new fabric.Line([i, 0, i, canvasHeight], {
+      var line = new fabric.Line([i + 5, 5, i + 5, canvasHeight + 5], {
         stroke: (i % 100) - (canvasWidth % 100) == 0 ? "gray" : "lightgray",
         selectable: false,
         hasControls: false,
@@ -88,8 +87,16 @@
       --> The "createPoint" event is handled in the parent component (App.svelte)
     */
     canvas.on("mouse:down", function (options) {
-      let x = options.e.clientX - (options.e.clientX % 10);
-      let y = options.e.clientY - (options.e.clientY % 10);
+      // Get Bounding Rectangle of Canvas, so that the coordinates of the left margin can be found.
+      let boundingRectangle = canv.getBoundingClientRect();
+
+      // We subtract left and options.e.clientX by their respective remainders to center the point on the line. Same applied for the Y Coordinate
+      let left = boundingRectangle.left;
+      let x = Math.floor(options.e.clientX - (options.e.clientX % 10) - (left - (left % 10) + 5));
+
+      let top = boundingRectangle.top;
+      let y = Math.ceil(options.e.clientY - (options.e.clientY % 10) - (top - (top % 10)) - 5);
+      console.log(x, y);
       createPoint(x, y);
     });
   });
@@ -98,21 +105,19 @@
     if (!hasStarted) {
       // Check to see if point already exists.
 
-      if (x > 90 && y <= window.innerHeight - 200) {
-        var point = new fabric.Circle({
-          radius: 5,
-          fill: "black",
-          left: x,
-          top: y,
-          originX: "center",
-          originY: "top",
-          selectable: false,
-        });
+      var point = new fabric.Circle({
+        radius: 5,
+        fill: "black",
+        left: x,
+        top: y,
+        originX: "center",
+        originY: "center",
+        selectable: false,
+      });
 
-        // Add point to DOM and to the list of Point Elements
-        canvas.add(point);
-        dispatch("createPoint", { coordinates: { x, y }, element: point });
-      }
+      // Add point to DOM and to the list of Point Elements
+      canvas.add(point);
+      dispatch("createPoint", { coordinates: { x, y }, element: point });
     }
   }
 </script>

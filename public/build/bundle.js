@@ -32923,7 +32923,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (122:0) {#each verticalRuling as ruling}
+    // (127:0) {#each verticalRuling as ruling}
     function create_each_block_1(ctx) {
     	let span;
     	let t_value = /*ruling*/ ctx[8].number + "";
@@ -32936,7 +32936,7 @@ var app = (function () {
     			attr_dev(span, "class", "number svelte-aaxc4c");
     			set_style(span, "top", /*ruling*/ ctx[8].top + "px");
     			set_style(span, "left", /*ruling*/ ctx[8].left + "px");
-    			add_location(span, file$6, 122, 2, 4022);
+    			add_location(span, file$6, 127, 2, 4398);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
@@ -32962,14 +32962,14 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(122:0) {#each verticalRuling as ruling}",
+    		source: "(127:0) {#each verticalRuling as ruling}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (126:0) {#each horizontalRuling as ruling}
+    // (131:0) {#each horizontalRuling as ruling}
     function create_each_block$1(ctx) {
     	let span;
     	let t_value = /*ruling*/ ctx[8].number + "";
@@ -32982,7 +32982,7 @@ var app = (function () {
     			attr_dev(span, "class", "number svelte-aaxc4c");
     			set_style(span, "bottom", /*ruling*/ ctx[8].bottom + "px");
     			set_style(span, "left", /*ruling*/ ctx[8].left + "px");
-    			add_location(span, file$6, 126, 2, 4229);
+    			add_location(span, file$6, 131, 2, 4605);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
@@ -33008,7 +33008,7 @@ var app = (function () {
     		block,
     		id: create_each_block$1.name,
     		type: "each",
-    		source: "(126:0) {#each horizontalRuling as ruling}",
+    		source: "(131:0) {#each horizontalRuling as ruling}",
     		ctx
     	});
 
@@ -33061,11 +33061,11 @@ var app = (function () {
     			attr_dev(canvas_1, "width", "500");
     			attr_dev(canvas_1, "height", "300");
     			attr_dev(canvas_1, "class", "svelte-aaxc4c");
-    			add_location(canvas_1, file$6, 119, 0, 3916);
+    			add_location(canvas_1, file$6, 124, 0, 4292);
     			attr_dev(span, "class", "number svelte-aaxc4c");
     			set_style(span, "bottom", "-30px");
     			set_style(span, "left", "-25px");
-    			add_location(span, file$6, 124, 0, 4126);
+    			add_location(span, file$6, 129, 0, 4502);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -33186,21 +33186,19 @@ var app = (function () {
     		canvas.selectable = false;
     		let canvasHeight = window.innerHeight - 200 - window.innerHeight % 100;
     		let canvasWidth = window.innerWidth - 200 - window.innerWidth % 100;
-    		canvas.setHeight(canvasHeight + 1);
-    		canvas.setWidth(canvasWidth + 1);
+    		canvas.setHeight(canvasHeight + 11);
+    		canvas.setWidth(canvasWidth + 11);
 
     		// Send canvas to Parent ( App.svelte ), because the "canvas" variable is needed to add objects and to animate the objects.
     		dispatch("canvas", canvas);
 
-    		// Draw the graph with ruling
-    		console.log(canvasWidth, canvasHeight);
-
     		// Hardcoded based on chrome, May not be the same in other browsers.
     		let widthOfEachCharacter = 8.625;
 
+    		// Draw the graph with ruling
     		// Horizontal Lines
-    		for (let i = 0; i <= canvasHeight + 10; i += 10) {
-    			var line = new fabric_1.fabric.Line([0, i, window.innerWidth - 100, i],
+    		for (let i = 0; i <= canvasHeight; i += 10) {
+    			var line = new fabric_1.fabric.Line([5, i + 5, canvasWidth + 5, i + 5],
     			{
     					stroke: i % 100 - canvasHeight % 100 == 0 ? "gray" : "lightgray",
     					selectable: false,
@@ -33229,7 +33227,7 @@ var app = (function () {
 
     		// Vertical lines
     		for (let i = 0; i <= canvasWidth; i += 10) {
-    			var line = new fabric_1.fabric.Line([i, 0, i, canvasHeight],
+    			var line = new fabric_1.fabric.Line([i + 5, 5, i + 5, canvasHeight + 5],
     			{
     					stroke: i % 100 - canvasWidth % 100 == 0 ? "gray" : "lightgray",
     					selectable: false,
@@ -33254,8 +33252,16 @@ var app = (function () {
       --> The "createPoint" event is handled in the parent component (App.svelte)
     */
     		canvas.on("mouse:down", function (options) {
-    			let x = options.e.clientX - options.e.clientX % 10;
-    			let y = options.e.clientY - options.e.clientY % 10;
+    			// Get Bounding Rectangle of Canvas, so that the coordinates of the left margin can be found.
+    			let boundingRectangle = canv.getBoundingClientRect();
+
+    			// We subtract left and options.e.clientX by their respective remainders to center the point on the line. Same applied for the Y Coordinate
+    			let left = boundingRectangle.left;
+
+    			let x = Math.floor(options.e.clientX - options.e.clientX % 10 - (left - left % 10 + 5));
+    			let top = boundingRectangle.top;
+    			let y = Math.ceil(options.e.clientY - options.e.clientY % 10 - (top - top % 10) - 5);
+    			console.log(x, y);
     			createPoint(x, y);
     		});
     	});
@@ -33263,22 +33269,20 @@ var app = (function () {
     	function createPoint(x, y) {
     		if (!hasStarted) {
     			// Check to see if point already exists.
-    			if (x > 90 && y <= window.innerHeight - 200) {
-    				var point = new fabric_1.fabric.Circle({
-    						radius: 5,
-    						fill: "black",
-    						left: x,
-    						top: y,
-    						originX: "center",
-    						originY: "top",
-    						selectable: false
-    					});
+    			var point = new fabric_1.fabric.Circle({
+    					radius: 5,
+    					fill: "black",
+    					left: x,
+    					top: y,
+    					originX: "center",
+    					originY: "center",
+    					selectable: false
+    				});
 
-    				// Add point to DOM and to the list of Point Elements
-    				canvas.add(point);
+    			// Add point to DOM and to the list of Point Elements
+    			canvas.add(point);
 
-    				dispatch("createPoint", { coordinates: { x, y }, element: point });
-    			}
+    			dispatch("createPoint", { coordinates: { x, y }, element: point });
     		}
     	}
 
@@ -34611,6 +34615,7 @@ var app = (function () {
     };
 
     let findClosestPair = (pointElements, pointsCoordinates) => {
+      console.log(pointsCoordinates);
       frameNumber = 0;
       frames = [];
       let { points: sortedX, elements: eX } = insertionSort(
