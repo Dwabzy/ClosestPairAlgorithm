@@ -1,11 +1,12 @@
 <script>
-  import { fabric } from "fabric";
+  import { fabric } from "fabric-with-gestures";
   import { onMount } from "svelte";
   import { createEventDispatcher } from "svelte";
 
   const dispatch = createEventDispatcher();
 
   let canv;
+  let canvas;
 
   // Passed as prop from App.svelte. If it is true, do not add any more points.
   export let hasStarted = false;
@@ -15,7 +16,7 @@
     --> A graph is drawn with proper ruling.
   */
   onMount(() => {
-    let canvas = new fabric.Canvas(canv);
+    canvas = new fabric.Canvas(canv);
     canvas.selectable = false;
     canvas.setHeight(window.innerHeight - 175);
     canvas.setWidth(window.innerWidth);
@@ -79,13 +80,14 @@
       
       --> The "createPoint" event is handled in the parent component (App.svelte)
     */
+    alert("fabric.isTouchSupported=" + fabric.isTouchSupported);
     canvas.on("mouse:down", function (options) {
       let x = options.e.clientX - (options.e.clientX % 10);
       let y = options.e.clientY - (options.e.clientY % 10);
       createPoint(x, y);
     });
 
-    canvas.on("touch:start", function (options) {
+    canvas.on("touch:longpress", function (options) {
       let x = options.e.clientX - (options.e.clientX % 10);
       let y = options.e.clientY - (options.e.clientY % 10);
       createPoint(x, y);
