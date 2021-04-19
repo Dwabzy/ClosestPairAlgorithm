@@ -80,29 +80,39 @@
       --> The "createPoint" event is handled in the parent component (App.svelte)
     */
     canvas.on("mouse:down", function (options) {
-      if (!hasStarted) {
-        let x = options.e.clientX - (options.e.clientX % 10);
-        let y = options.e.clientY - (options.e.clientY % 10);
-        // Check to see if point already exists.
+      let x = options.e.clientX - (options.e.clientX % 10);
+      let y = options.e.clientY - (options.e.clientY % 10);
+      createPoint(x, y);
+    });
 
-        if (x > 90 && y <= window.innerHeight - 200) {
-          var point = new fabric.Circle({
-            radius: 5,
-            fill: "black",
-            left: x,
-            top: y,
-            originX: "center",
-            originY: "top",
-            selectable: false,
-          });
-
-          // Add point to DOM and to the list of Point Elements
-          canvas.add(point);
-          dispatch("createPoint", { coordinates: { x, y }, element: point });
-        }
-      }
+    canvas.on("touch:start", function (options) {
+      let x = options.e.clientX - (options.e.clientX % 10);
+      let y = options.e.clientY - (options.e.clientY % 10);
+      createPoint(x, y);
     });
   });
+
+  function createPoint(x, y) {
+    if (!hasStarted) {
+      // Check to see if point already exists.
+
+      if (x > 90 && y <= window.innerHeight - 200) {
+        var point = new fabric.Circle({
+          radius: 5,
+          fill: "black",
+          left: x,
+          top: y,
+          originX: "center",
+          originY: "top",
+          selectable: false,
+        });
+
+        // Add point to DOM and to the list of Point Elements
+        canvas.add(point);
+        dispatch("createPoint", { coordinates: { x, y }, element: point });
+      }
+    }
+  }
 </script>
 
 <canvas bind:this={canv} width="500" height="300" />
