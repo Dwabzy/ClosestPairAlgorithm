@@ -103,11 +103,14 @@
 
     --> "currentMidLines" serves a similar to purpose to that of "currentDistanceLineObjects", but stores the line drawn to separate the points into
     halves.
+
+    --> stripRegion stores the latest rectangle (highlighting the strip region) that has been added to the canvas.
   */
   let history = [];
   let distanceBoxes = [];
   let currentDistanceLineObjects = [];
   let currentMidLines = [];
+  let stripRegion;
 
   /*
     --> Called when the nextFrame/ previousFrame buttons are pressed and when the play button is pressed.
@@ -166,21 +169,22 @@
             When reverting a "strip" frame, We have to remove the rectangle set the
             color of points back to black and radius to 5.
          */
+          canvas.remove(currentFrameObject.stripRegion);
           setAttributes(currentFrameObject.elements, {
             fill: "black",
             radius: 5,
           });
         } else if (currentFrameObject.type === "stripClosest") {
           /* 
-            --> When reverting a "stripClosest" frame, We should highlight the points in the strip
-              region. 
+            --> When reverting a "stripClosest" frame, We should add the "stripRegion" rectangle that was removed and highlight the points in the 
+            strip region. 
             --> If a new shorter line was drawn, we have to remove that line and add the previous shorter line (from the previous compare frame) and add it
               back to the canvas.
             --> The midline that was removed must also be added back to the canvas and to the array tracking midlines.
           */
-
+          canvas.add(currentFrameObject.stripRegion);
           setAttributes(currentFrameObject.elements, {
-            fill: "lime",
+            fill: "red",
             radius: 6,
           });
 
@@ -369,11 +373,14 @@
     --> Called when the "currentFrame" is of type "strip".
     --> Highlights the points in that region.
   */
-  async function stripVisualization({ frameNumber, elements }, duration) {
-    setAttributes(elements, { fill: "lime", radius: 6 });
+  async function stripVisualization({ frameNumber, x1, y1, x2, y2, elements }, duration) {
+    stripRegion = createRectangle(x1, y1, 0, 0, "yellow", 0.5);
+    canvas.add(stripRegion);
 
     history.push({ frameNumber, type: "strip", elements });
+    await animate(canvas, stripRegion, { width: x2 - x1, height: y2 - y1 }, duration);
 
+    setAttributes(elements, { fill: "red", radius: 6 });
     await sleep(duration);
   }
 
@@ -390,6 +397,7 @@
   ) {
     let { x: x1, y: y1 } = p1;
     let { x: x2, y: y2 } = p2;
+    canvas.remove(stripRegion);
 
     // Get Midline
     let [midLineObject] = currentMidLines.slice(-1);
@@ -403,6 +411,7 @@
       type: "stripClosest",
       elements,
       hasCloserPointsInStrip,
+      stripRegion,
       midLineObject,
       line: lineObject,
     };
@@ -446,6 +455,7 @@
         line: shorterLine,
         distance,
         box: distanceBox,
+        stripRegion,
       };
 
       currentDistanceLineObjects.push(stripObject);
@@ -478,6 +488,7 @@
     for (let i = 0; i < currentDistanceLineObjects.length; i++)
       canvas.remove(currentDistanceLineObjects[i].line);
     for (let i = 0; i < currentMidLines.length; i++) canvas.remove(currentMidLines[i].line);
+    canvas.remove(stripRegion);
 
     history = [];
     distanceBoxes = [];
@@ -505,6 +516,7 @@
     for (let i = 0; i < currentDistanceLineObjects.length; i++)
       canvas.remove(currentDistanceLineObjects[i].line);
     for (let i = 0; i < currentMidLines.length; i++) canvas.remove(currentMidLines[i].line);
+    canvas.remove(stripRegion);
 
     pointElements = [];
     pointsCoordinates = [];
@@ -530,6 +542,19 @@
       selectable: false,
     });
     return line;
+  };
+
+  // Helper function create a Fabric Rect object to visualize the strip region.
+  let createRectangle = (x1, y1, width, height, color, opacity) => {
+    var rect = new fabric.Rect({
+      left: x1,
+      top: y1,
+      width: width,
+      height: height,
+      fill: color,
+      opacity: opacity,
+    });
+    return rect;
   };
 
   // Helper function to animate Fabric objects. Stops when "stopAnimation" is set to true.

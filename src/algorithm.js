@@ -34,7 +34,7 @@ let findClosestPair = (pointElements, pointsCoordinates) => {
   yStart = sortedY[0].y - 10;
   yEnd = sortedY[n - 1].y + 20;
 
-  return closestPair(sortedX, sortedY, n, eX, eY);
+  return closestPair(sortedX, n, eX);
 };
 
 let getDistance = (a, b) => {
@@ -74,13 +74,21 @@ let stripClosest = (strip, n, distance, points, elements) => {
   let distanceSq = distance * distance;
   let { p1, p2 } = points;
   let hasCloserPointsInStrip = false;
+
+  // Sort elements based on y coordinate.
+  let { points: stripPoints, elements: stripElements } = insertionSort(
+    strip.slice(),
+    elements.slice(),
+    "y"
+  );
+
   for (let i = 0; i < n - 1; i++) {
     let j = i + 1;
-    while (j < n && Math.pow(strip[j].y - strip[i].y, 2) < distanceSq) {
-      if (getDistance(strip[i], strip[j]) < distanceSq) {
-        distanceSq = getDistance(strip[i], strip[j]);
-        p1 = strip[i];
-        p2 = strip[j];
+    while (j < n && Math.pow(stripPoints[j].y - stripPoints[i].y, 2) < distanceSq) {
+      if (getDistance(stripPoints[i], stripPoints[j]) < distanceSq) {
+        distanceSq = getDistance(stripPoints[i], stripPoints[j]);
+        p1 = stripPoints[i];
+        p2 = stripPoints[j];
         hasCloserPointsInStrip = true;
       }
       j++;
@@ -93,7 +101,7 @@ let stripClosest = (strip, n, distance, points, elements) => {
     p1,
     p2,
     hasCloserPointsInStrip,
-    elements,
+    elements: stripElements,
     distance,
   };
   frames.push(frame);
@@ -101,7 +109,7 @@ let stripClosest = (strip, n, distance, points, elements) => {
   return { d: distance, points: { p1, p2 } };
 };
 
-let closestPair = (p, q, n, eX, eY) => {
+let closestPair = (p, n, eX) => {
   if (n <= 3) {
     // Brute Force algorithm is used when there are 3 points are lesser.
     return bruteForce(p, n, eX);
@@ -117,12 +125,8 @@ let closestPair = (p, q, n, eX, eY) => {
       */
     let pLeft = p.slice(0, mid);
     let pRight = p.slice(mid, n);
-    let qLeft = q.slice(0, mid);
-    let qRight = q.slice(mid, n);
     let exLeft = eX.slice(0, mid);
     let exRight = eX.slice(mid, n);
-    let eyLeft = eY.slice(0, mid);
-    let eyRight = eY.slice(mid, n);
 
     // Split into two frame, (Draws midline)
     let frame = {
@@ -136,11 +140,11 @@ let closestPair = (p, q, n, eX, eY) => {
     frames.push(frame);
 
     // Get Shortest Distance from Left Side
-    let left = closestPair(pLeft, qLeft, pLeft.length, exLeft, eyLeft);
+    let left = closestPair(pLeft, pLeft.length, exLeft);
     let { d: dLeft, points: pointsLeft } = left;
 
     // Get Shortest Distance from Right Side
-    let right = closestPair(pRight, qRight, pRight.length, exRight, eyRight);
+    let right = closestPair(pRight, pRight.length, exRight);
     let { d: dRight, points: pointsRight } = right;
 
     // Find the shortest distance and highlight the 2 lines that are being compared.
@@ -163,9 +167,9 @@ let closestPair = (p, q, n, eX, eY) => {
     let strip = [];
     let stripElements = [];
     for (let i = 0; i < n; i++) {
-      if (Math.abs(q[i].x - midPoint.x) < distance) {
-        strip.push(q[i]);
-        stripElements.push(eY[i]);
+      if (Math.abs(p[i].x - midPoint.x) < distance) {
+        strip.push(p[i]);
+        stripElements.push(eX[i]);
       }
     }
 
@@ -173,6 +177,10 @@ let closestPair = (p, q, n, eX, eY) => {
     frame = {
       frameNumber: frameNumber++,
       type: "strip",
+      x1: Math.abs(midPoint.x - distance),
+      y1: yStart,
+      x2: Math.abs(midPoint.x + distance),
+      y2: yEnd,
       elements: stripElements,
     };
     frames.push(frame);

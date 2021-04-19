@@ -34420,7 +34420,7 @@ var app = (function () {
       yStart = sortedY[0].y - 10;
       yEnd = sortedY[n - 1].y + 20;
 
-      return closestPair(sortedX, sortedY, n, eX, eY);
+      return closestPair(sortedX, n, eX);
     };
 
     let getDistance = (a, b) => {
@@ -34460,13 +34460,21 @@ var app = (function () {
       let distanceSq = distance * distance;
       let { p1, p2 } = points;
       let hasCloserPointsInStrip = false;
+
+      // Sort elements based on y coordinate.
+      let { points: stripPoints, elements: stripElements } = insertionSort(
+        strip.slice(),
+        elements.slice(),
+        "y"
+      );
+
       for (let i = 0; i < n - 1; i++) {
         let j = i + 1;
-        while (j < n && Math.pow(strip[j].y - strip[i].y, 2) < distanceSq) {
-          if (getDistance(strip[i], strip[j]) < distanceSq) {
-            distanceSq = getDistance(strip[i], strip[j]);
-            p1 = strip[i];
-            p2 = strip[j];
+        while (j < n && Math.pow(stripPoints[j].y - stripPoints[i].y, 2) < distanceSq) {
+          if (getDistance(stripPoints[i], stripPoints[j]) < distanceSq) {
+            distanceSq = getDistance(stripPoints[i], stripPoints[j]);
+            p1 = stripPoints[i];
+            p2 = stripPoints[j];
             hasCloserPointsInStrip = true;
           }
           j++;
@@ -34479,7 +34487,7 @@ var app = (function () {
         p1,
         p2,
         hasCloserPointsInStrip,
-        elements,
+        elements: stripElements,
         distance,
       };
       frames.push(frame);
@@ -34487,7 +34495,7 @@ var app = (function () {
       return { d: distance, points: { p1, p2 } };
     };
 
-    let closestPair = (p, q, n, eX, eY) => {
+    let closestPair = (p, n, eX) => {
       if (n <= 3) {
         // Brute Force algorithm is used when there are 3 points are lesser.
         return bruteForce(p, n, eX);
@@ -34503,12 +34511,8 @@ var app = (function () {
           */
         let pLeft = p.slice(0, mid);
         let pRight = p.slice(mid, n);
-        let qLeft = q.slice(0, mid);
-        let qRight = q.slice(mid, n);
         let exLeft = eX.slice(0, mid);
         let exRight = eX.slice(mid, n);
-        let eyLeft = eY.slice(0, mid);
-        let eyRight = eY.slice(mid, n);
 
         // Split into two frame, (Draws midline)
         let frame = {
@@ -34522,11 +34526,11 @@ var app = (function () {
         frames.push(frame);
 
         // Get Shortest Distance from Left Side
-        let left = closestPair(pLeft, qLeft, pLeft.length, exLeft, eyLeft);
+        let left = closestPair(pLeft, pLeft.length, exLeft);
         let { d: dLeft, points: pointsLeft } = left;
 
         // Get Shortest Distance from Right Side
-        let right = closestPair(pRight, qRight, pRight.length, exRight, eyRight);
+        let right = closestPair(pRight, pRight.length, exRight);
         let { d: dRight, points: pointsRight } = right;
 
         // Find the shortest distance and highlight the 2 lines that are being compared.
@@ -34549,9 +34553,9 @@ var app = (function () {
         let strip = [];
         let stripElements = [];
         for (let i = 0; i < n; i++) {
-          if (Math.abs(q[i].x - midPoint.x) < distance) {
-            strip.push(q[i]);
-            stripElements.push(eY[i]);
+          if (Math.abs(p[i].x - midPoint.x) < distance) {
+            strip.push(p[i]);
+            stripElements.push(eX[i]);
           }
         }
 
@@ -34559,6 +34563,10 @@ var app = (function () {
         frame = {
           frameNumber: frameNumber++,
           type: "strip",
+          x1: Math.abs(midPoint.x - distance),
+          y1: yStart,
+          x2: Math.abs(midPoint.x + distance),
+          y2: yEnd,
           elements: stripElements,
         };
         frames.push(frame);
@@ -34597,15 +34605,15 @@ var app = (function () {
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[31] = list[i];
+    	child_ctx[33] = list[i];
     	return child_ctx;
     }
 
-    // (591:0) {#each distanceBoxes as distanceBox}
+    // (616:0) {#each distanceBoxes as distanceBox}
     function create_each_block(ctx) {
     	let div1;
     	let div0;
-    	let t0_value = (/*distanceBox*/ ctx[31].distance / 10).toFixed(2) + "";
+    	let t0_value = (/*distanceBox*/ ctx[33].distance / 10).toFixed(2) + "";
     	let t0;
     	let t1;
     	let div1_class_value;
@@ -34617,15 +34625,15 @@ var app = (function () {
     			t0 = text(t0_value);
     			t1 = space();
     			attr_dev(div0, "class", "distance svelte-17de1c3");
-    			add_location(div0, file, 597, 4, 22915);
+    			add_location(div0, file, 622, 4, 23871);
 
-    			attr_dev(div1, "class", div1_class_value = "" + (null_to_empty(/*distanceBox*/ ctx[31].visibility === "visible"
+    			attr_dev(div1, "class", div1_class_value = "" + (null_to_empty(/*distanceBox*/ ctx[33].visibility === "visible"
     			? "distance-container visibile"
     			: "distance-container hidden") + " svelte-17de1c3"));
 
-    			set_style(div1, "top", /*distanceBox*/ ctx[31].top + 10 + "px");
-    			set_style(div1, "left", /*distanceBox*/ ctx[31].left + "px");
-    			add_location(div1, file, 591, 2, 22700);
+    			set_style(div1, "top", /*distanceBox*/ ctx[33].top + 10 + "px");
+    			set_style(div1, "left", /*distanceBox*/ ctx[33].left + "px");
+    			add_location(div1, file, 616, 2, 23656);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -34634,20 +34642,20 @@ var app = (function () {
     			append_dev(div1, t1);
     		},
     		p: function update(ctx, dirty) {
-    			if (dirty[0] & /*distanceBoxes*/ 1 && t0_value !== (t0_value = (/*distanceBox*/ ctx[31].distance / 10).toFixed(2) + "")) set_data_dev(t0, t0_value);
+    			if (dirty[0] & /*distanceBoxes*/ 1 && t0_value !== (t0_value = (/*distanceBox*/ ctx[33].distance / 10).toFixed(2) + "")) set_data_dev(t0, t0_value);
 
-    			if (dirty[0] & /*distanceBoxes*/ 1 && div1_class_value !== (div1_class_value = "" + (null_to_empty(/*distanceBox*/ ctx[31].visibility === "visible"
+    			if (dirty[0] & /*distanceBoxes*/ 1 && div1_class_value !== (div1_class_value = "" + (null_to_empty(/*distanceBox*/ ctx[33].visibility === "visible"
     			? "distance-container visibile"
     			: "distance-container hidden") + " svelte-17de1c3"))) {
     				attr_dev(div1, "class", div1_class_value);
     			}
 
     			if (dirty[0] & /*distanceBoxes*/ 1) {
-    				set_style(div1, "top", /*distanceBox*/ ctx[31].top + 10 + "px");
+    				set_style(div1, "top", /*distanceBox*/ ctx[33].top + 10 + "px");
     			}
 
     			if (dirty[0] & /*distanceBoxes*/ 1) {
-    				set_style(div1, "left", /*distanceBox*/ ctx[31].left + "px");
+    				set_style(div1, "left", /*distanceBox*/ ctx[33].left + "px");
     			}
     		},
     		d: function destroy(detaching) {
@@ -34659,7 +34667,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(591:0) {#each distanceBoxes as distanceBox}",
+    		source: "(616:0) {#each distanceBoxes as distanceBox}",
     		ctx
     	});
 
@@ -34893,12 +34901,15 @@ var app = (function () {
 
       --> "currentMidLines" serves a similar to purpose to that of "currentDistanceLineObjects", but stores the line drawn to separate the points into
       halves.
+
+      --> stripRegion stores the latest rectangle (highlighting the strip region) that has been added to the canvas.
     */
     	let history = [];
 
     	let distanceBoxes = [];
     	let currentDistanceLineObjects = [];
     	let currentMidLines = [];
+    	let stripRegion;
 
     	/*
       --> Called when the nextFrame/ previousFrame buttons are pressed and when the play button is pressed.
@@ -34955,16 +34966,20 @@ var app = (function () {
       When reverting a "strip" frame, We have to remove the rectangle set the
       color of points back to black and radius to 5.
              */
+    					canvas.remove(currentFrameObject.stripRegion);
+
     					setAttributes(currentFrameObject.elements, { fill: "black", radius: 5 });
     				} else if (currentFrameObject.type === "stripClosest") {
     					/* 
-      --> When reverting a "stripClosest" frame, We should highlight the points in the strip
-        region. 
+      --> When reverting a "stripClosest" frame, We should add the "stripRegion" rectangle that was removed and highlight the points in the 
+      strip region. 
       --> If a new shorter line was drawn, we have to remove that line and add the previous shorter line (from the previous compare frame) and add it
         back to the canvas.
       --> The midline that was removed must also be added back to the canvas and to the array tracking midlines.
     */
-    					setAttributes(currentFrameObject.elements, { fill: "lime", radius: 6 });
+    					canvas.add(currentFrameObject.stripRegion);
+
+    					setAttributes(currentFrameObject.elements, { fill: "red", radius: 6 });
 
     					// Remove new line (if there's one)
     					if (currentFrameObject.hasCloserPointsInStrip) {
@@ -35151,9 +35166,12 @@ var app = (function () {
       --> Called when the "currentFrame" is of type "strip".
       --> Highlights the points in that region.
     */
-    	async function stripVisualization({ frameNumber, elements }, duration) {
-    		setAttributes(elements, { fill: "lime", radius: 6 });
+    	async function stripVisualization({ frameNumber, x1, y1, x2, y2, elements }, duration) {
+    		stripRegion = createRectangle(x1, y1, 0, 0, "yellow", 0.5);
+    		canvas.add(stripRegion);
     		history.push({ frameNumber, type: "strip", elements });
+    		await animate(canvas, stripRegion, { width: x2 - x1, height: y2 - y1 }, duration);
+    		setAttributes(elements, { fill: "red", radius: 6 });
     		await sleep(duration);
     	}
 
@@ -35167,6 +35185,7 @@ var app = (function () {
     	async function stripClosestVisualization({ frameNumber, p1, p2, hasCloserPointsInStrip, elements, distance }, duration) {
     		let { x: x1, y: y1 } = p1;
     		let { x: x2, y: y2 } = p2;
+    		canvas.remove(stripRegion);
 
     		// Get Midline
     		let [midLineObject] = currentMidLines.slice(-1);
@@ -35182,6 +35201,7 @@ var app = (function () {
     			type: "stripClosest",
     			elements,
     			hasCloserPointsInStrip,
+    			stripRegion,
     			midLineObject,
     			line: lineObject
     		};
@@ -35226,7 +35246,8 @@ var app = (function () {
     				type: "stripLine",
     				line: shorterLine,
     				distance,
-    				box: distanceBox
+    				box: distanceBox,
+    				stripRegion
     			};
 
     			currentDistanceLineObjects.push(stripObject);
@@ -35256,6 +35277,7 @@ var app = (function () {
     		$$invalidate(4, isPlaying = false);
     		for (let i = 0; i < currentDistanceLineObjects.length; i++) canvas.remove(currentDistanceLineObjects[i].line);
     		for (let i = 0; i < currentMidLines.length; i++) canvas.remove(currentMidLines[i].line);
+    		canvas.remove(stripRegion);
     		history = [];
     		$$invalidate(0, distanceBoxes = []);
     		currentDistanceLineObjects = [];
@@ -35278,6 +35300,7 @@ var app = (function () {
     		for (let i = 0; i < pointElements.length; i++) canvas.remove(pointElements[i]);
     		for (let i = 0; i < currentDistanceLineObjects.length; i++) canvas.remove(currentDistanceLineObjects[i].line);
     		for (let i = 0; i < currentMidLines.length; i++) canvas.remove(currentMidLines[i].line);
+    		canvas.remove(stripRegion);
     		pointElements = [];
     		$$invalidate(1, pointsCoordinates = []);
     		history = [];
@@ -35292,6 +35315,20 @@ var app = (function () {
     	let createLine = (x1, y1, x2, y2, stroke, strokeWidth) => {
     		var line = new fabric.Line([x1, y1, x2, y2], { stroke, strokeWidth, selectable: false });
     		return line;
+    	};
+
+    	// Helper function create a Fabric Rect object to visualize the strip region.
+    	let createRectangle = (x1, y1, width, height, color, opacity) => {
+    		var rect = new fabric.Rect({
+    				left: x1,
+    				top: y1,
+    				width,
+    				height,
+    				fill: color,
+    				opacity
+    			});
+
+    		return rect;
     	};
 
     	// Helper function to animate Fabric objects. Stops when "stopAnimation" is set to true.
@@ -35350,6 +35387,7 @@ var app = (function () {
     		distanceBoxes,
     		currentDistanceLineObjects,
     		currentMidLines,
+    		stripRegion,
     		changeFrame,
     		stopAnimation,
     		startAnimation,
@@ -35362,6 +35400,7 @@ var app = (function () {
     		reset,
     		sleep,
     		createLine,
+    		createRectangle,
     		animate,
     		setAttributes,
     		setVisibility
@@ -35380,8 +35419,10 @@ var app = (function () {
     		if ("distanceBoxes" in $$props) $$invalidate(0, distanceBoxes = $$props.distanceBoxes);
     		if ("currentDistanceLineObjects" in $$props) currentDistanceLineObjects = $$props.currentDistanceLineObjects;
     		if ("currentMidLines" in $$props) currentMidLines = $$props.currentMidLines;
+    		if ("stripRegion" in $$props) stripRegion = $$props.stripRegion;
     		if ("stopAnimation" in $$props) stopAnimation = $$props.stopAnimation;
     		if ("createLine" in $$props) createLine = $$props.createLine;
+    		if ("createRectangle" in $$props) createRectangle = $$props.createRectangle;
     		if ("animate" in $$props) animate = $$props.animate;
     		if ("setAttributes" in $$props) setAttributes = $$props.setAttributes;
     	};
