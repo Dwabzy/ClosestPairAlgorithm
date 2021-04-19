@@ -85,12 +85,6 @@
       let y = options.e.clientY - (options.e.clientY % 10);
       createPoint(x, y);
     });
-
-    canvas.on("touch:gesture", function (options) {
-      let x = options.e.clientX - (options.e.clientX % 10);
-      let y = options.e.clientY - (options.e.clientY % 10);
-      createPoint(x, y);
-    });
   });
 
   function createPoint(x, y) {

@@ -153,11 +153,9 @@
 <div class="error-message" style="top:{errorTop}px">
   {errorMessage}
 </div>
-
 <div id=" title" class="x-axis">
   <h1>Closest Pair Algorithm ( Divide and Conquer )</h1>
 </div>
-
 <div class="footer">
   <!-- Conditonally renders either the start button or the animation controls according to the boolean variable "displayControls" -->
   {#if !displayControls}
@@ -280,17 +278,13 @@
   }
 
   .x-axis {
-    position: absolute;
-    left: 0;
-    bottom: 100px;
-
     height: 75px;
     width: 100%;
 
     background: white;
     margin-top: 1px;
 
-    z-index: -1;
+    z-index: 5;
 
     display: flex;
     justify-content: center;
@@ -300,10 +294,8 @@
   }
 
   .footer {
-    position: absolute;
-    bottom: 0;
-
-    width: 100%;
+    width: auto;
+    margin: auto 0;
     height: 100px;
 
     background-color: white;
