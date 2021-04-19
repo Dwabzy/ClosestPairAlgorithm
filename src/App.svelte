@@ -180,7 +180,7 @@
           */
 
           setAttributes(currentFrameObject.elements, {
-            fill: "blue",
+            fill: "lime",
             radius: 6,
           });
 
@@ -370,7 +370,7 @@
     --> Highlights the points in that region.
   */
   async function stripVisualization({ frameNumber, elements }, duration) {
-    setAttributes(elements, { fill: "blue", radius: 6 });
+    setAttributes(elements, { fill: "lime", radius: 6 });
 
     history.push({ frameNumber, type: "strip", elements });
 

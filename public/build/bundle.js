@@ -34963,7 +34963,7 @@ var app = (function () {
         back to the canvas.
       --> The midline that was removed must also be added back to the canvas and to the array tracking midlines.
     */
-    					setAttributes(currentFrameObject.elements, { fill: "blue", radius: 6 });
+    					setAttributes(currentFrameObject.elements, { fill: "lime", radius: 6 });
 
     					// Remove new line (if there's one)
     					if (currentFrameObject.hasCloserPointsInStrip) {
@@ -35151,7 +35151,7 @@ var app = (function () {
       --> Highlights the points in that region.
     */
     	async function stripVisualization({ frameNumber, elements }, duration) {
-    		setAttributes(elements, { fill: "blue", radius: 6 });
+    		setAttributes(elements, { fill: "lime", radius: 6 });
     		history.push({ frameNumber, type: "strip", elements });
     		await sleep(duration);
     	}
