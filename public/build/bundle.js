@@ -32964,13 +32964,13 @@ var app = (function () {
     			t3 = text(t3_value);
     			t4 = text(")");
     			t5 = space();
-    			attr_dev(div0, "class", "coordinates svelte-8y6mou");
+    			attr_dev(div0, "class", "coordinates svelte-v06pu8");
     			add_location(div0, file$7, 142, 4, 5184);
     			attr_dev(div1, "draggable", "true");
 
     			attr_dev(div1, "class", div1_class_value = "" + (null_to_empty(/*coordinatesVisible*/ ctx[1]
     			? "coordinates-container visibile"
-    			: "coordinates-container hidden") + " svelte-8y6mou"));
+    			: "coordinates-container hidden") + " svelte-v06pu8"));
 
     			set_style(div1, "top", /*point*/ ctx[17].y + 5 + "px");
     			set_style(div1, "left", /*point*/ ctx[17].x - 20 + "px");
@@ -32992,7 +32992,7 @@ var app = (function () {
 
     			if (dirty & /*coordinatesVisible*/ 2 && div1_class_value !== (div1_class_value = "" + (null_to_empty(/*coordinatesVisible*/ ctx[1]
     			? "coordinates-container visibile"
-    			: "coordinates-container hidden") + " svelte-8y6mou"))) {
+    			: "coordinates-container hidden") + " svelte-v06pu8"))) {
     				attr_dev(div1, "class", div1_class_value);
     			}
 
@@ -33030,7 +33030,7 @@ var app = (function () {
     		c: function create() {
     			span = element("span");
     			t = text(t_value);
-    			attr_dev(span, "class", "number svelte-8y6mou");
+    			attr_dev(span, "class", "number svelte-v06pu8");
     			set_style(span, "top", /*ruling*/ ctx[12].top + "px");
     			set_style(span, "left", /*ruling*/ ctx[12].left + "px");
     			add_location(span, file$7, 150, 2, 5374);
@@ -33076,7 +33076,7 @@ var app = (function () {
     		c: function create() {
     			span = element("span");
     			t = text(t_value);
-    			attr_dev(span, "class", "number svelte-8y6mou");
+    			attr_dev(span, "class", "number svelte-v06pu8");
     			set_style(span, "bottom", /*ruling*/ ctx[12].bottom + "px");
     			set_style(span, "left", /*ruling*/ ctx[12].left + "px");
     			add_location(span, file$7, 154, 2, 5581);
@@ -33172,9 +33172,9 @@ var app = (function () {
     			each2_anchor = empty();
     			attr_dev(canvas_1, "width", "500");
     			attr_dev(canvas_1, "height", "300");
-    			attr_dev(canvas_1, "class", "svelte-8y6mou");
+    			attr_dev(canvas_1, "class", "svelte-v06pu8");
     			add_location(canvas_1, file$7, 135, 0, 4895);
-    			attr_dev(span, "class", "number svelte-8y6mou");
+    			attr_dev(span, "class", "number svelte-v06pu8");
     			set_style(span, "bottom", "-30px");
     			set_style(span, "left", "-25px");
     			add_location(span, file$7, 152, 0, 5478);

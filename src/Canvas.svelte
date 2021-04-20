@@ -175,7 +175,7 @@
     height: 30px;
     width: 40px;
     background-color: white;
-    padding: 0 3px;
+    padding: 0 5px;
 
     display: flex;
     align-items: center;
