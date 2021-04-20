@@ -43,6 +43,7 @@
       (point) => point.x === coordinates.x && point.y === coordinates.y
     );
     if (!duplicatePoint) {
+      canvas.add(element);
       pointElements = [...pointElements, element];
       pointsCoordinates = [...pointsCoordinates, coordinates];
       points = [...points, graphCoordinates];
@@ -533,7 +534,9 @@
     isPlaying = false;
     hasStarted = false;
 
-    for (let i = 0; i < pointElements.length; i++) canvas.remove(pointElements[i]);
+    for (let i = 0; i < pointElements.length; i++) {
+      canvas.remove(pointElements[i]);
+    }
     for (let i = 0; i < currentDistanceLineObjects.length; i++)
       canvas.remove(currentDistanceLineObjects[i].line);
     for (let i = 0; i < currentMidLines.length; i++) canvas.remove(currentMidLines[i].line);
@@ -626,13 +629,11 @@
 
 <div class="main-container">
   <div id=" title" class="title">
-    <div class="spacer" />
     <h1>Closest Pair Algorithm ( Divide and Conquer )</h1>
-    <div class="spacer" />
     <span class="settings"
       ><p>Display Co-ordinates</p>
-      <Toggle bind:checked={coordinatesVisible} /></span
-    >
+      <Toggle bind:checked={coordinatesVisible} />
+    </span>
   </div>
   <div class="canvas-box">
     <Canvas
@@ -685,14 +686,9 @@
     margin: 0 auto;
   }
 
-  .footer-container {
-    justify-self: end;
-  }
-
   .settings {
+    min-width: 250px;
     cursor: pointer;
-
-    margin-right: 10px;
 
     display: flex;
     align-items: center;
@@ -701,11 +697,10 @@
       margin: 0 10px;
     }
   }
-  .spacer {
-    flex: 1 1 auto;
-  }
+
   .title {
-    height: 75px;
+    position: relative;
+    height: auto;
     width: 100%;
 
     background: white;
@@ -715,6 +710,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
 
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;

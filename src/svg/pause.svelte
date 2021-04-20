@@ -1,10 +1,4 @@
-<svg
-  width="18"
-  height="30"
-  viewBox="0 0 18 30"
-  fill="none"
-  xmlns="http://www.w3.org/2000/svg"
->
+<svg width="18" height="30" viewBox="0 0 18 30" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect
     x="18"
     y="30"
@@ -51,7 +45,7 @@
 
 <style>
   svg {
-    height: 50px;
+    height: 70%;
     width: auto;
   }
 </style>

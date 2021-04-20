@@ -14,7 +14,9 @@
 
   // calculate the height and width of the canvas based on the size of the window.
   let canvasHeight = window.innerHeight - 200 - (window.innerHeight % 100);
-  let canvasWidth = window.innerWidth - 200 - (window.innerWidth % 100);
+  let canvasWidth;
+  if (window.innerWidth > 480) canvasWidth = window.innerWidth - 200 - (window.innerWidth % 100);
+  else canvasWidth = window.innerWidth - 100 - (window.innerWidth % 100);
 
   // Passed as prop from App.svelte. If it is true, do not add any more points.
   export let hasStarted = false;
@@ -90,25 +92,40 @@
     canvas.on("mouse:down", function (options) {
       // Get Bounding Rectangle of Canvas, so that the coordinates of the left margin can be found.
       let boundingRectangle = canv.getBoundingClientRect();
-      console.log(options.e.clientY, boundingRectangle.top);
       // We subtract left and options.e.clientX by their respective remainders to center the point on the line. Same applied for the Y Coordinate
       let left = boundingRectangle.left;
       let x = Math.floor(Math.round(options.e.clientX / 10) * 10 - (left - (left % 10) + 5));
       console.log();
 
       let top = boundingRectangle.top;
-      let y = Math.ceil(options.e.clientY - (options.e.clientY % 10) - (top - (top % 10)) - 5);
+      let y = Math.ceil(Math.round(options.e.clientY / 10) * 10 - (top - (top % 10)) - 5);
 
       let graphX = (x - 5) / 10;
       let graphY = (canvasHeight + 5 - y) / 10;
-      createPoint(x, y, graphX, graphY);
+      if (x && y) createPoint(x, y, graphX, graphY);
+    });
+
+    canvas.on("touch:drag", function (options) {
+      // So that touch event does not work on desktop.
+      if (window.innerWidth <= 800 && window.innerHeight <= 600) {
+        // We subtract left and options.e.clientX by their respective remainders to center the point on the line. Same applied for the Y Coordinate
+
+        let x = Math.round(options.self.x / 10) * 10;
+
+        let y = Math.round(options.self.y / 10) * 10;
+
+        let graphX = x / 10;
+        let graphY = (canvasHeight - y) / 10;
+
+        createPoint(x + 5, y + 5, graphX, graphY);
+      }
     });
   });
 
   // Points are used to display the coordinates of each point on the canvas reactively whenever they are created (There is a "for each" loop in html part of this component)
   export let points = [];
   function createPoint(x, y, graphX, graphY) {
-    if (!hasStarted && x > 0 && y <= canvasHeight + 5) {
+    if (!hasStarted && x > 0 && x - 5 <= canvasWidth && y <= canvasHeight + 5) {
       // Check to see if point already exists.
       var point = new fabric.Circle({
         radius: 5,
@@ -120,8 +137,6 @@
         selectable: false,
       });
 
-      // Add point to DOM and to the list of Point Elements
-      canvas.add(point);
       dispatch("createPoint", {
         coordinates: { x, y },
         element: point,

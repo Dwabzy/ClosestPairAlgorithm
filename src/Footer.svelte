@@ -220,6 +220,10 @@
     height: 75px;
     width: 75px;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     &:hover {
       box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.5);
     }
@@ -259,8 +263,7 @@
   }
 
   .frame-counter {
-    position: absolute;
-    right: 50px;
+    margin-left: auto;
     height: 40px;
     width: 80px;
 
@@ -277,8 +280,8 @@
 
   .footer {
     width: auto;
-    margin: auto 0;
-    height: 100px;
+    padding: 15px 0;
+    height: auto;
 
     background-color: white;
     box-shadow: 0px 1px 4px hsl(0, 0%, 50%);
@@ -286,5 +289,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .rect-btn {
+      width: 60px;
+      height: 30px;
+      font-size: 0.75rem;
+    }
+
+    .control {
+      width: 45px;
+      height: 45px;
+    }
   }
 </style>

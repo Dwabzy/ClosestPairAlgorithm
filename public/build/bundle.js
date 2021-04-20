@@ -32940,7 +32940,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (137:0) {#each points as point}
+    // (152:0) {#each points as point}
     function create_each_block_2(ctx) {
     	let div1;
     	let div0;
@@ -32965,7 +32965,7 @@ var app = (function () {
     			t4 = text(")");
     			t5 = space();
     			attr_dev(div0, "class", "coordinates svelte-v06pu8");
-    			add_location(div0, file$7, 142, 4, 5184);
+    			add_location(div0, file$7, 157, 4, 5776);
     			attr_dev(div1, "draggable", "true");
 
     			attr_dev(div1, "class", div1_class_value = "" + (null_to_empty(/*coordinatesVisible*/ ctx[1]
@@ -32974,7 +32974,7 @@ var app = (function () {
 
     			set_style(div1, "top", /*point*/ ctx[17].y + 5 + "px");
     			set_style(div1, "left", /*point*/ ctx[17].x - 20 + "px");
-    			add_location(div1, file$7, 137, 2, 4990);
+    			add_location(div1, file$7, 152, 2, 5582);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -33013,14 +33013,14 @@ var app = (function () {
     		block,
     		id: create_each_block_2.name,
     		type: "each",
-    		source: "(137:0) {#each points as point}",
+    		source: "(152:0) {#each points as point}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (150:0) {#each verticalRuling as ruling}
+    // (165:0) {#each verticalRuling as ruling}
     function create_each_block_1(ctx) {
     	let span;
     	let t_value = /*ruling*/ ctx[12].number + "";
@@ -33033,7 +33033,7 @@ var app = (function () {
     			attr_dev(span, "class", "number svelte-v06pu8");
     			set_style(span, "top", /*ruling*/ ctx[12].top + "px");
     			set_style(span, "left", /*ruling*/ ctx[12].left + "px");
-    			add_location(span, file$7, 150, 2, 5374);
+    			add_location(span, file$7, 165, 2, 5966);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
@@ -33059,14 +33059,14 @@ var app = (function () {
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(150:0) {#each verticalRuling as ruling}",
+    		source: "(165:0) {#each verticalRuling as ruling}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (154:0) {#each horizontalRuling as ruling}
+    // (169:0) {#each horizontalRuling as ruling}
     function create_each_block$1(ctx) {
     	let span;
     	let t_value = /*ruling*/ ctx[12].number + "";
@@ -33079,7 +33079,7 @@ var app = (function () {
     			attr_dev(span, "class", "number svelte-v06pu8");
     			set_style(span, "bottom", /*ruling*/ ctx[12].bottom + "px");
     			set_style(span, "left", /*ruling*/ ctx[12].left + "px");
-    			add_location(span, file$7, 154, 2, 5581);
+    			add_location(span, file$7, 169, 2, 6173);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
@@ -33105,7 +33105,7 @@ var app = (function () {
     		block,
     		id: create_each_block$1.name,
     		type: "each",
-    		source: "(154:0) {#each horizontalRuling as ruling}",
+    		source: "(169:0) {#each horizontalRuling as ruling}",
     		ctx
     	});
 
@@ -33173,11 +33173,11 @@ var app = (function () {
     			attr_dev(canvas_1, "width", "500");
     			attr_dev(canvas_1, "height", "300");
     			attr_dev(canvas_1, "class", "svelte-v06pu8");
-    			add_location(canvas_1, file$7, 135, 0, 4895);
+    			add_location(canvas_1, file$7, 150, 0, 5487);
     			attr_dev(span, "class", "number svelte-v06pu8");
     			set_style(span, "bottom", "-30px");
     			set_style(span, "left", "-25px");
-    			add_location(span, file$7, 152, 0, 5478);
+    			add_location(span, file$7, 167, 0, 6070);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -33323,7 +33323,8 @@ var app = (function () {
     	// calculate the height and width of the canvas based on the size of the window.
     	let canvasHeight = window.innerHeight - 200 - window.innerHeight % 100;
 
-    	let canvasWidth = window.innerWidth - 200 - window.innerWidth % 100;
+    	let canvasWidth;
+    	if (window.innerWidth > 480) canvasWidth = window.innerWidth - 200 - window.innerWidth % 100; else canvasWidth = window.innerWidth - 100 - window.innerWidth % 100;
     	let { hasStarted = false } = $$props;
 
     	/*
@@ -33402,25 +33403,36 @@ var app = (function () {
     			// Get Bounding Rectangle of Canvas, so that the coordinates of the left margin can be found.
     			let boundingRectangle = canv.getBoundingClientRect();
 
-    			console.log(options.e.clientY, boundingRectangle.top);
-
     			// We subtract left and options.e.clientX by their respective remainders to center the point on the line. Same applied for the Y Coordinate
     			let left = boundingRectangle.left;
 
     			let x = Math.floor(Math.round(options.e.clientX / 10) * 10 - (left - left % 10 + 5));
     			console.log();
     			let top = boundingRectangle.top;
-    			let y = Math.ceil(options.e.clientY - options.e.clientY % 10 - (top - top % 10) - 5);
+    			let y = Math.ceil(Math.round(options.e.clientY / 10) * 10 - (top - top % 10) - 5);
     			let graphX = (x - 5) / 10;
     			let graphY = (canvasHeight + 5 - y) / 10;
-    			createPoint(x, y, graphX, graphY);
+    			if (x && y) createPoint(x, y, graphX, graphY);
+    		});
+
+    		canvas.on("touch:drag", function (options) {
+    			// So that touch event does not work on desktop.
+    			if (window.innerWidth <= 800 && window.innerHeight <= 600) {
+    				// We subtract left and options.e.clientX by their respective remainders to center the point on the line. Same applied for the Y Coordinate
+    				let x = Math.round(options.self.x / 10) * 10;
+
+    				let y = Math.round(options.self.y / 10) * 10;
+    				let graphX = x / 10;
+    				let graphY = (canvasHeight - y) / 10;
+    				createPoint(x + 5, y + 5, graphX, graphY);
+    			}
     		});
     	});
 
     	let { points = [] } = $$props;
 
     	function createPoint(x, y, graphX, graphY) {
-    		if (!hasStarted && x > 0 && y <= canvasHeight + 5) {
+    		if (!hasStarted && x > 0 && x - 5 <= canvasWidth && y <= canvasHeight + 5) {
     			// Check to see if point already exists.
     			var point = new fabric_1.fabric.Circle({
     					radius: 5,
@@ -33431,9 +33443,6 @@ var app = (function () {
     					originY: "center",
     					selectable: false
     				});
-
-    			// Add point to DOM and to the list of Point Elements
-    			canvas.add(point);
 
     			dispatch("createPoint", {
     				coordinates: { x, y },
@@ -33574,31 +33583,31 @@ var app = (function () {
     			stop2 = svg_element("stop");
     			attr_dev(path, "d", "M25.5 14.134C26.1667 14.5189 26.1667 15.4811 25.5 15.866L1.5 29.7224C0.83333 30.1073 0 29.6262 0 28.8564L0 1.14359C0 0.37379 0.833334 -0.107332 1.5 0.277568L25.5 14.134Z");
     			attr_dev(path, "fill", "url(#paint0_linear)");
-    			add_location(path, file$6, 7, 2, 116);
+    			add_location(path, file$6, 1, 2, 99);
     			attr_dev(stop0, "stop-color", "#4F8FF0");
     			attr_dev(stop0, "stop-opacity", "0");
-    			add_location(stop0, file$6, 20, 6, 515);
+    			add_location(stop0, file$6, 14, 6, 498);
     			attr_dev(stop1, "offset", "0.5");
     			attr_dev(stop1, "stop-color", "#2961B5");
     			attr_dev(stop1, "stop-opacity", "0.47");
-    			add_location(stop1, file$6, 21, 6, 569);
+    			add_location(stop1, file$6, 15, 6, 552);
     			attr_dev(stop2, "offset", "1");
     			attr_dev(stop2, "stop-color", "#4F8FF0");
-    			add_location(stop2, file$6, 22, 6, 639);
+    			add_location(stop2, file$6, 16, 6, 622);
     			attr_dev(linearGradient, "id", "paint0_linear");
     			attr_dev(linearGradient, "x1", "38");
     			attr_dev(linearGradient, "y1", "15");
     			attr_dev(linearGradient, "x2", "-0.500001");
     			attr_dev(linearGradient, "y2", "15");
     			attr_dev(linearGradient, "gradientUnits", "userSpaceOnUse");
-    			add_location(linearGradient, file$6, 12, 4, 354);
-    			add_location(defs, file$6, 11, 2, 342);
+    			add_location(linearGradient, file$6, 6, 4, 337);
+    			add_location(defs, file$6, 5, 2, 325);
     			attr_dev(svg, "width", "26");
     			attr_dev(svg, "height", "30");
     			attr_dev(svg, "viewBox", "0 0 26 30");
     			attr_dev(svg, "fill", "none");
     			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
-    			attr_dev(svg, "class", "svelte-doczs7");
+    			attr_dev(svg, "class", "svelte-1rptqoh");
     			add_location(svg, file$6, 0, 0, 0);
     		},
     		l: function claim(nodes) {
@@ -33690,51 +33699,51 @@ var app = (function () {
     			stop4 = svg_element("stop");
     			attr_dev(path, "d", "M34.5 17.134C35.1667 17.5189 35.1667 18.4811 34.5 18.866L10.5 32.7224C9.83333 33.1073 9 32.6262 9 31.8564L9 4.14359C9 3.37379 9.83333 2.89267 10.5 3.27757L34.5 17.134Z");
     			attr_dev(path, "fill", "url(#paint0_linear)");
-    			add_location(path, file$5, 7, 2, 116);
+    			add_location(path, file$5, 1, 2, 99);
     			attr_dev(rect, "x", "29");
     			attr_dev(rect, "y", "3");
     			attr_dev(rect, "width", "6");
     			attr_dev(rect, "height", "30");
     			attr_dev(rect, "rx", "1");
     			attr_dev(rect, "fill", "url(#paint1_linear)");
-    			add_location(rect, file$5, 11, 2, 340);
+    			add_location(rect, file$5, 5, 2, 323);
     			attr_dev(stop0, "stop-color", "#4F8FF0");
     			attr_dev(stop0, "stop-opacity", "0");
-    			add_location(stop0, file$5, 21, 6, 588);
+    			add_location(stop0, file$5, 15, 6, 571);
     			attr_dev(stop1, "offset", "0.5");
     			attr_dev(stop1, "stop-color", "#2961B5");
     			attr_dev(stop1, "stop-opacity", "0.47");
-    			add_location(stop1, file$5, 22, 6, 642);
+    			add_location(stop1, file$5, 16, 6, 625);
     			attr_dev(stop2, "offset", "1");
     			attr_dev(stop2, "stop-color", "#4F8FF0");
-    			add_location(stop2, file$5, 23, 6, 712);
+    			add_location(stop2, file$5, 17, 6, 695);
     			attr_dev(linearGradient0, "id", "paint0_linear");
     			attr_dev(linearGradient0, "x1", "47");
     			attr_dev(linearGradient0, "y1", "18");
     			attr_dev(linearGradient0, "x2", "8.5");
     			attr_dev(linearGradient0, "y2", "18");
     			attr_dev(linearGradient0, "gradientUnits", "userSpaceOnUse");
-    			add_location(linearGradient0, file$5, 13, 4, 433);
+    			add_location(linearGradient0, file$5, 7, 4, 416);
     			attr_dev(stop3, "stop-color", "#2B7FFE");
     			attr_dev(stop3, "stop-opacity", "0");
-    			add_location(stop3, file$5, 33, 6, 935);
+    			add_location(stop3, file$5, 27, 6, 918);
     			attr_dev(stop4, "offset", "0.0833333");
     			attr_dev(stop4, "stop-color", "#4F8FF0");
-    			add_location(stop4, file$5, 34, 6, 989);
+    			add_location(stop4, file$5, 28, 6, 972);
     			attr_dev(linearGradient1, "id", "paint1_linear");
     			attr_dev(linearGradient1, "x1", "29");
     			attr_dev(linearGradient1, "y1", "18");
     			attr_dev(linearGradient1, "x2", "35");
     			attr_dev(linearGradient1, "y2", "18");
     			attr_dev(linearGradient1, "gradientUnits", "userSpaceOnUse");
-    			add_location(linearGradient1, file$5, 25, 4, 781);
-    			add_location(defs, file$5, 12, 2, 421);
+    			add_location(linearGradient1, file$5, 19, 4, 764);
+    			add_location(defs, file$5, 6, 2, 404);
     			attr_dev(svg, "width", "36");
     			attr_dev(svg, "height", "36");
     			attr_dev(svg, "viewBox", "0 0 36 36");
     			attr_dev(svg, "fill", "none");
     			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
-    			attr_dev(svg, "class", "svelte-v7atku");
+    			attr_dev(svg, "class", "svelte-1dp56l6");
     			add_location(svg, file$5, 0, 0, 0);
     		},
     		l: function claim(nodes) {
@@ -33830,7 +33839,7 @@ var app = (function () {
     			stop4 = svg_element("stop");
     			attr_dev(path, "d", "M1.5 18.866C0.833332 18.4811 0.833333 17.5189 1.5 17.134L25.5 3.27757C26.1667 2.89267 27 3.3738 27 4.1436L27 31.8564C27 32.6262 26.1667 33.1073 25.5 32.7224L1.5 18.866Z");
     			attr_dev(path, "fill", "url(#paint0_linear)");
-    			add_location(path, file$4, 7, 2, 116);
+    			add_location(path, file$4, 1, 2, 99);
     			attr_dev(rect, "x", "7");
     			attr_dev(rect, "y", "33");
     			attr_dev(rect, "width", "6");
@@ -33838,44 +33847,44 @@ var app = (function () {
     			attr_dev(rect, "rx", "1");
     			attr_dev(rect, "transform", "rotate(180 7 33)");
     			attr_dev(rect, "fill", "url(#paint1_linear)");
-    			add_location(rect, file$4, 11, 2, 341);
+    			add_location(rect, file$4, 5, 2, 324);
     			attr_dev(stop0, "stop-color", "#4F8FF0");
     			attr_dev(stop0, "stop-opacity", "0");
-    			add_location(stop0, file$4, 29, 6, 658);
+    			add_location(stop0, file$4, 23, 6, 641);
     			attr_dev(stop1, "offset", "0.5");
     			attr_dev(stop1, "stop-color", "#2961B5");
     			attr_dev(stop1, "stop-opacity", "0.47");
-    			add_location(stop1, file$4, 30, 6, 712);
+    			add_location(stop1, file$4, 24, 6, 695);
     			attr_dev(stop2, "offset", "1");
     			attr_dev(stop2, "stop-color", "#4F8FF0");
-    			add_location(stop2, file$4, 31, 6, 782);
+    			add_location(stop2, file$4, 25, 6, 765);
     			attr_dev(linearGradient0, "id", "paint0_linear");
     			attr_dev(linearGradient0, "x1", "-11");
     			attr_dev(linearGradient0, "y1", "18");
     			attr_dev(linearGradient0, "x2", "27.5");
     			attr_dev(linearGradient0, "y2", "18");
     			attr_dev(linearGradient0, "gradientUnits", "userSpaceOnUse");
-    			add_location(linearGradient0, file$4, 21, 4, 501);
+    			add_location(linearGradient0, file$4, 15, 4, 484);
     			attr_dev(stop3, "stop-color", "#2B7FFE");
     			attr_dev(stop3, "stop-opacity", "0");
-    			add_location(stop3, file$4, 41, 6, 1004);
+    			add_location(stop3, file$4, 35, 6, 987);
     			attr_dev(stop4, "offset", "0.0833333");
     			attr_dev(stop4, "stop-color", "#4F8FF0");
-    			add_location(stop4, file$4, 42, 6, 1058);
+    			add_location(stop4, file$4, 36, 6, 1041);
     			attr_dev(linearGradient1, "id", "paint1_linear");
     			attr_dev(linearGradient1, "x1", "7");
     			attr_dev(linearGradient1, "y1", "48");
     			attr_dev(linearGradient1, "x2", "13");
     			attr_dev(linearGradient1, "y2", "48");
     			attr_dev(linearGradient1, "gradientUnits", "userSpaceOnUse");
-    			add_location(linearGradient1, file$4, 33, 4, 851);
-    			add_location(defs, file$4, 20, 2, 489);
+    			add_location(linearGradient1, file$4, 27, 4, 834);
+    			add_location(defs, file$4, 14, 2, 472);
     			attr_dev(svg, "width", "36");
     			attr_dev(svg, "height", "36");
     			attr_dev(svg, "viewBox", "0 0 36 36");
     			attr_dev(svg, "fill", "none");
     			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
-    			attr_dev(svg, "class", "svelte-doczs7");
+    			attr_dev(svg, "class", "svelte-1rptqoh");
     			add_location(svg, file$4, 0, 0, 0);
     		},
     		l: function claim(nodes) {
@@ -33974,7 +33983,7 @@ var app = (function () {
     			attr_dev(rect0, "rx", "1");
     			attr_dev(rect0, "transform", "rotate(180 18 30)");
     			attr_dev(rect0, "fill", "url(#paint0_linear)");
-    			add_location(rect0, file$3, 7, 2, 116);
+    			add_location(rect0, file$3, 1, 2, 99);
     			attr_dev(rect1, "x", "6");
     			attr_dev(rect1, "y", "30");
     			attr_dev(rect1, "width", "6");
@@ -33982,40 +33991,40 @@ var app = (function () {
     			attr_dev(rect1, "rx", "1");
     			attr_dev(rect1, "transform", "rotate(180 6 30)");
     			attr_dev(rect1, "fill", "url(#paint1_linear)");
-    			add_location(rect1, file$3, 16, 2, 266);
+    			add_location(rect1, file$3, 10, 2, 249);
     			attr_dev(stop0, "stop-color", "#2B7FFE");
     			attr_dev(stop0, "stop-opacity", "0");
-    			add_location(stop0, file$3, 34, 6, 580);
+    			add_location(stop0, file$3, 28, 6, 563);
     			attr_dev(stop1, "offset", "0.0833333");
     			attr_dev(stop1, "stop-color", "#4F8FF0");
-    			add_location(stop1, file$3, 35, 6, 634);
+    			add_location(stop1, file$3, 29, 6, 617);
     			attr_dev(linearGradient0, "id", "paint0_linear");
     			attr_dev(linearGradient0, "x1", "18");
     			attr_dev(linearGradient0, "y1", "45");
     			attr_dev(linearGradient0, "x2", "24");
     			attr_dev(linearGradient0, "y2", "45");
     			attr_dev(linearGradient0, "gradientUnits", "userSpaceOnUse");
-    			add_location(linearGradient0, file$3, 26, 4, 426);
+    			add_location(linearGradient0, file$3, 20, 4, 409);
     			attr_dev(stop2, "stop-color", "#2B7FFE");
     			attr_dev(stop2, "stop-opacity", "0");
-    			add_location(stop2, file$3, 45, 6, 864);
+    			add_location(stop2, file$3, 39, 6, 847);
     			attr_dev(stop3, "offset", "0.0833333");
     			attr_dev(stop3, "stop-color", "#4F8FF0");
-    			add_location(stop3, file$3, 46, 6, 918);
+    			add_location(stop3, file$3, 40, 6, 901);
     			attr_dev(linearGradient1, "id", "paint1_linear");
     			attr_dev(linearGradient1, "x1", "6");
     			attr_dev(linearGradient1, "y1", "45");
     			attr_dev(linearGradient1, "x2", "12");
     			attr_dev(linearGradient1, "y2", "45");
     			attr_dev(linearGradient1, "gradientUnits", "userSpaceOnUse");
-    			add_location(linearGradient1, file$3, 37, 4, 711);
-    			add_location(defs, file$3, 25, 2, 414);
+    			add_location(linearGradient1, file$3, 31, 4, 694);
+    			add_location(defs, file$3, 19, 2, 397);
     			attr_dev(svg, "width", "18");
     			attr_dev(svg, "height", "30");
     			attr_dev(svg, "viewBox", "0 0 18 30");
     			attr_dev(svg, "fill", "none");
     			attr_dev(svg, "xmlns", "http://www.w3.org/2000/svg");
-    			attr_dev(svg, "class", "svelte-oft6vy");
+    			attr_dev(svg, "class", "svelte-1u2t3x");
     			add_location(svg, file$3, 0, 0, 0);
     		},
     		l: function claim(nodes) {
@@ -34151,27 +34160,27 @@ var app = (function () {
     			t9 = text(t9_value);
     			t10 = text(" / ");
     			t11 = text(/*noOfFrames*/ ctx[2]);
-    			attr_dev(div0, "class", "spacer svelte-wc19t5");
+    			attr_dev(div0, "class", "spacer svelte-ng5h87");
     			add_location(div0, file$2, 162, 4, 6601);
     			attr_dev(button0, "id", "restart-button");
-    			attr_dev(button0, "class", "rect-btn svelte-wc19t5");
+    			attr_dev(button0, "class", "rect-btn svelte-ng5h87");
     			add_location(button0, file$2, 163, 4, 6629);
     			button1.disabled = /*disablePrev*/ ctx[7];
-    			attr_dev(button1, "class", "control svelte-wc19t5");
+    			attr_dev(button1, "class", "control svelte-ng5h87");
     			add_location(button1, file$2, 164, 4, 6717);
-    			attr_dev(button2, "class", "control svelte-wc19t5");
+    			attr_dev(button2, "class", "control svelte-ng5h87");
     			attr_dev(button2, "id", "play");
     			add_location(button2, file$2, 167, 4, 6846);
     			button3.disabled = /*disableNext*/ ctx[6];
-    			attr_dev(button3, "class", "control svelte-wc19t5");
+    			attr_dev(button3, "class", "control svelte-ng5h87");
     			add_location(button3, file$2, 174, 4, 7012);
     			attr_dev(button4, "id", "reset-button");
-    			attr_dev(button4, "class", "rect-btn svelte-wc19t5");
+    			attr_dev(button4, "class", "rect-btn svelte-ng5h87");
     			add_location(button4, file$2, 177, 4, 7140);
-    			attr_dev(div1, "class", "spacer svelte-wc19t5");
+    			attr_dev(div1, "class", "spacer svelte-ng5h87");
     			add_location(div1, file$2, 178, 4, 7220);
     			attr_dev(div2, "id", "frame-counter");
-    			attr_dev(div2, "class", "frame-counter svelte-wc19t5");
+    			attr_dev(div2, "class", "frame-counter svelte-ng5h87");
     			add_location(div2, file$2, 181, 4, 7328);
     		},
     		m: function mount(target, anchor) {
@@ -34306,7 +34315,7 @@ var app = (function () {
     			button = element("button");
     			button.textContent = "Start";
     			attr_dev(button, "id", "start-button");
-    			attr_dev(button, "class", "rect-btn svelte-wc19t5");
+    			attr_dev(button, "class", "rect-btn svelte-ng5h87");
     			add_location(button, file$2, 159, 4, 6477);
     		},
     		m: function mount(target, anchor) {
@@ -34442,10 +34451,10 @@ var app = (function () {
     			t1 = space();
     			div1 = element("div");
     			if_block.c();
-    			attr_dev(div0, "class", "error-message svelte-wc19t5");
+    			attr_dev(div0, "class", "error-message svelte-ng5h87");
     			set_style(div0, "top", /*errorTop*/ ctx[5] + "px");
     			add_location(div0, file$2, 152, 0, 6208);
-    			attr_dev(div1, "class", "footer svelte-wc19t5");
+    			attr_dev(div1, "class", "footer svelte-ng5h87");
     			add_location(div1, file$2, 156, 0, 6290);
     		},
     		l: function claim(nodes) {
@@ -35138,7 +35147,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (646:4) {#each distanceBoxes as box}
+    // (647:4) {#each distanceBoxes as box}
     function create_each_block(ctx) {
     	let div1;
     	let div0;
@@ -35153,17 +35162,17 @@ var app = (function () {
     			div0 = element("div");
     			t0 = text(t0_value);
     			t1 = space();
-    			attr_dev(div0, "class", "distance svelte-v01a3s");
-    			add_location(div0, file, 652, 8, 24632);
+    			attr_dev(div0, "class", "distance svelte-1g5wplx");
+    			add_location(div0, file, 653, 8, 24619);
 
     			attr_dev(div1, "class", div1_class_value = "" + (null_to_empty(/*box*/ ctx[36].visibility === "visible"
     			? "distance-container visibile"
-    			: "distance-container hidden") + " svelte-v01a3s"));
+    			: "distance-container hidden") + " svelte-1g5wplx"));
 
     			set_style(div1, "top", /*box*/ ctx[36].top + "px");
     			set_style(div1, "left", /*box*/ ctx[36].left - 40 + "px");
     			set_style(div1, "transform", "rotate(" + /*box*/ ctx[36].angle % 90 + "deg");
-    			add_location(div1, file, 646, 6, 24390);
+    			add_location(div1, file, 647, 6, 24377);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -35176,7 +35185,7 @@ var app = (function () {
 
     			if (dirty[0] & /*distanceBoxes*/ 1 && div1_class_value !== (div1_class_value = "" + (null_to_empty(/*box*/ ctx[36].visibility === "visible"
     			? "distance-container visibile"
-    			: "distance-container hidden") + " svelte-v01a3s"))) {
+    			: "distance-container hidden") + " svelte-1g5wplx"))) {
     				attr_dev(div1, "class", div1_class_value);
     			}
 
@@ -35201,7 +35210,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(646:4) {#each distanceBoxes as box}",
+    		source: "(647:4) {#each distanceBoxes as box}",
     		ctx
     	});
 
@@ -35209,25 +35218,21 @@ var app = (function () {
     }
 
     function create_fragment(ctx) {
-    	let div5;
-    	let div2;
+    	let div3;
     	let div0;
-    	let t0;
     	let h1;
-    	let t2;
-    	let div1;
-    	let t3;
+    	let t1;
     	let span;
     	let p;
-    	let t5;
+    	let t3;
     	let toggle;
     	let updating_checked;
-    	let t6;
-    	let div3;
+    	let t4;
+    	let div1;
     	let canvas_1;
-    	let t7;
-    	let t8;
-    	let div4;
+    	let t5;
+    	let t6;
+    	let div2;
     	let footer;
     	let current;
 
@@ -35281,80 +35286,68 @@ var app = (function () {
 
     	const block = {
     		c: function create() {
-    			div5 = element("div");
-    			div2 = element("div");
+    			div3 = element("div");
     			div0 = element("div");
-    			t0 = space();
     			h1 = element("h1");
     			h1.textContent = "Closest Pair Algorithm ( Divide and Conquer )";
-    			t2 = space();
-    			div1 = element("div");
-    			t3 = space();
+    			t1 = space();
     			span = element("span");
     			p = element("p");
     			p.textContent = "Display Co-ordinates";
-    			t5 = space();
+    			t3 = space();
     			create_component(toggle.$$.fragment);
-    			t6 = space();
-    			div3 = element("div");
+    			t4 = space();
+    			div1 = element("div");
     			create_component(canvas_1.$$.fragment);
-    			t7 = space();
+    			t5 = space();
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
 
-    			t8 = space();
-    			div4 = element("div");
+    			t6 = space();
+    			div2 = element("div");
     			create_component(footer.$$.fragment);
-    			attr_dev(div0, "class", "spacer svelte-v01a3s");
-    			add_location(div0, file, 628, 4, 23886);
-    			attr_dev(h1, "class", "svelte-v01a3s");
-    			add_location(h1, file, 629, 4, 23913);
-    			attr_dev(div1, "class", "spacer svelte-v01a3s");
-    			add_location(div1, file, 630, 4, 23972);
-    			attr_dev(p, "class", "svelte-v01a3s");
-    			add_location(p, file, 632, 7, 24029);
-    			attr_dev(span, "class", "settings svelte-v01a3s");
-    			add_location(span, file, 631, 4, 23999);
-    			attr_dev(div2, "id", " title");
-    			attr_dev(div2, "class", "title svelte-v01a3s");
-    			add_location(div2, file, 627, 2, 23850);
-    			attr_dev(div3, "class", "canvas-box svelte-v01a3s");
-    			add_location(div3, file, 636, 2, 24131);
-    			attr_dev(div4, "class", "footer-container svelte-v01a3s");
-    			add_location(div4, file, 658, 2, 24749);
-    			attr_dev(div5, "class", "main-container svelte-v01a3s");
-    			add_location(div5, file, 626, 0, 23819);
+    			attr_dev(h1, "class", "svelte-1g5wplx");
+    			add_location(h1, file, 631, 4, 23927);
+    			attr_dev(p, "class", "svelte-1g5wplx");
+    			add_location(p, file, 633, 7, 24016);
+    			attr_dev(span, "class", "settings svelte-1g5wplx");
+    			add_location(span, file, 632, 4, 23986);
+    			attr_dev(div0, "id", " title");
+    			attr_dev(div0, "class", "title svelte-1g5wplx");
+    			add_location(div0, file, 630, 2, 23891);
+    			attr_dev(div1, "class", "canvas-box svelte-1g5wplx");
+    			add_location(div1, file, 637, 2, 24118);
+    			attr_dev(div2, "class", "footer-container");
+    			add_location(div2, file, 659, 2, 24736);
+    			attr_dev(div3, "class", "main-container svelte-1g5wplx");
+    			add_location(div3, file, 629, 0, 23860);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div5, anchor);
-    			append_dev(div5, div2);
-    			append_dev(div2, div0);
-    			append_dev(div2, t0);
-    			append_dev(div2, h1);
-    			append_dev(div2, t2);
-    			append_dev(div2, div1);
-    			append_dev(div2, t3);
-    			append_dev(div2, span);
+    			insert_dev(target, div3, anchor);
+    			append_dev(div3, div0);
+    			append_dev(div0, h1);
+    			append_dev(div0, t1);
+    			append_dev(div0, span);
     			append_dev(span, p);
-    			append_dev(span, t5);
+    			append_dev(span, t3);
     			mount_component(toggle, span, null);
-    			append_dev(div5, t6);
-    			append_dev(div5, div3);
-    			mount_component(canvas_1, div3, null);
-    			append_dev(div3, t7);
+    			append_dev(div3, t4);
+    			append_dev(div3, div1);
+    			mount_component(canvas_1, div1, null);
+    			append_dev(div1, t5);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
-    				each_blocks[i].m(div3, null);
+    				each_blocks[i].m(div1, null);
     			}
 
-    			append_dev(div5, t8);
-    			append_dev(div5, div4);
-    			mount_component(footer, div4, null);
+    			append_dev(div3, t6);
+    			append_dev(div3, div2);
+    			mount_component(footer, div2, null);
     			current = true;
     		},
     		p: function update(ctx, dirty) {
@@ -35386,7 +35379,7 @@ var app = (function () {
     					} else {
     						each_blocks[i] = create_each_block(child_ctx);
     						each_blocks[i].c();
-    						each_blocks[i].m(div3, null);
+    						each_blocks[i].m(div1, null);
     					}
     				}
 
@@ -35418,7 +35411,7 @@ var app = (function () {
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div5);
+    			if (detaching) detach_dev(div3);
     			destroy_component(toggle);
     			destroy_component(canvas_1);
     			destroy_each(each_blocks, detaching);
@@ -35467,6 +35460,7 @@ var app = (function () {
     		let duplicatePoint = pointsCoordinates.find(point => point.x === coordinates.x && point.y === coordinates.y);
 
     		if (!duplicatePoint) {
+    			canvas.add(element);
     			pointElements = [...pointElements, element];
     			$$invalidate(1, pointsCoordinates = [...pointsCoordinates, coordinates]);
     			$$invalidate(2, points = [...points, graphCoordinates]);
@@ -35940,7 +35934,11 @@ var app = (function () {
     		stopAnimation = true;
     		$$invalidate(5, isPlaying = false);
     		$$invalidate(4, hasStarted = false);
-    		for (let i = 0; i < pointElements.length; i++) canvas.remove(pointElements[i]);
+
+    		for (let i = 0; i < pointElements.length; i++) {
+    			canvas.remove(pointElements[i]);
+    		}
+
     		for (let i = 0; i < currentDistanceLineObjects.length; i++) canvas.remove(currentDistanceLineObjects[i].line);
     		for (let i = 0; i < currentMidLines.length; i++) canvas.remove(currentMidLines[i].line);
     		canvas.remove(stripRegion);
