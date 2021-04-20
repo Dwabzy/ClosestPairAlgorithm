@@ -106,8 +106,8 @@
     });
 
     canvas.on("touch:drag", function (options) {
-      // So that touch event does not work on desktop.
-      if (window.innerWidth <= 800 && window.innerHeight <= 600) {
+      // So that touch event does not work on desktop
+      if (window.innerWidth <= 800) {
         // We subtract left and options.e.clientX by their respective remainders to center the point on the line. Same applied for the Y Coordinate
 
         let x = Math.round(options.self.x / 10) * 10;

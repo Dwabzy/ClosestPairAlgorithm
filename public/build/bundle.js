@@ -32965,7 +32965,7 @@ var app = (function () {
     			t4 = text(")");
     			t5 = space();
     			attr_dev(div0, "class", "coordinates svelte-v06pu8");
-    			add_location(div0, file$7, 157, 4, 5776);
+    			add_location(div0, file$7, 157, 4, 5746);
     			attr_dev(div1, "draggable", "true");
 
     			attr_dev(div1, "class", div1_class_value = "" + (null_to_empty(/*coordinatesVisible*/ ctx[1]
@@ -32974,7 +32974,7 @@ var app = (function () {
 
     			set_style(div1, "top", /*point*/ ctx[17].y + 5 + "px");
     			set_style(div1, "left", /*point*/ ctx[17].x - 20 + "px");
-    			add_location(div1, file$7, 152, 2, 5582);
+    			add_location(div1, file$7, 152, 2, 5552);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -33033,7 +33033,7 @@ var app = (function () {
     			attr_dev(span, "class", "number svelte-v06pu8");
     			set_style(span, "top", /*ruling*/ ctx[12].top + "px");
     			set_style(span, "left", /*ruling*/ ctx[12].left + "px");
-    			add_location(span, file$7, 165, 2, 5966);
+    			add_location(span, file$7, 165, 2, 5936);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
@@ -33079,7 +33079,7 @@ var app = (function () {
     			attr_dev(span, "class", "number svelte-v06pu8");
     			set_style(span, "bottom", /*ruling*/ ctx[12].bottom + "px");
     			set_style(span, "left", /*ruling*/ ctx[12].left + "px");
-    			add_location(span, file$7, 169, 2, 6173);
+    			add_location(span, file$7, 169, 2, 6143);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
@@ -33173,11 +33173,11 @@ var app = (function () {
     			attr_dev(canvas_1, "width", "500");
     			attr_dev(canvas_1, "height", "300");
     			attr_dev(canvas_1, "class", "svelte-v06pu8");
-    			add_location(canvas_1, file$7, 150, 0, 5487);
+    			add_location(canvas_1, file$7, 150, 0, 5457);
     			attr_dev(span, "class", "number svelte-v06pu8");
     			set_style(span, "bottom", "-30px");
     			set_style(span, "left", "-25px");
-    			add_location(span, file$7, 167, 0, 6070);
+    			add_location(span, file$7, 167, 0, 6040);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -33416,8 +33416,8 @@ var app = (function () {
     		});
 
     		canvas.on("touch:drag", function (options) {
-    			// So that touch event does not work on desktop.
-    			if (window.innerWidth <= 800 && window.innerHeight <= 600) {
+    			// So that touch event does not work on desktop
+    			if (window.innerWidth <= 800) {
     				// We subtract left and options.e.clientX by their respective remainders to center the point on the line. Same applied for the Y Coordinate
     				let x = Math.round(options.self.x / 10) * 10;
 
