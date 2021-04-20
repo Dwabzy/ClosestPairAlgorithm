@@ -90,10 +90,11 @@
     canvas.on("mouse:down", function (options) {
       // Get Bounding Rectangle of Canvas, so that the coordinates of the left margin can be found.
       let boundingRectangle = canv.getBoundingClientRect();
-
+      console.log(options.e.clientY, boundingRectangle.top);
       // We subtract left and options.e.clientX by their respective remainders to center the point on the line. Same applied for the Y Coordinate
       let left = boundingRectangle.left;
-      let x = Math.floor(options.e.clientX - (options.e.clientX % 10) - (left - (left % 10) + 5));
+      let x = Math.floor(Math.round(options.e.clientX / 10) * 10 - (left - (left % 10) + 5));
+      console.log();
 
       let top = boundingRectangle.top;
       let y = Math.ceil(options.e.clientY - (options.e.clientY % 10) - (top - (top % 10)) - 5);
@@ -128,13 +129,15 @@
       });
     }
   }
+
+  export let coordinatesVisible = true;
 </script>
 
 <canvas bind:this={canv} width="500" height="300"> Hello </canvas>
 {#each points as point}
   <div
     draggable="true"
-    class="coordinates-container"
+    class={coordinatesVisible ? "coordinates-container visibile" : "coordinates-container hidden"}
     style="top:{point.y + 5}px; left:{point.x - 20}px;"
   >
     <div class="coordinates">

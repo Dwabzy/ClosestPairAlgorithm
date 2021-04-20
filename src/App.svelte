@@ -3,6 +3,9 @@
   import Footer from "./Footer.svelte";
   import Algorithm from "./algorithm";
 
+  // SVG
+  import Toggle from "./toggle.svelte";
+
   /*
     --> "pointElements" is an array of Fabric circle objects corresponding to the points on the canvas.
     --> "pointCoordinates" stores the coordinates of the points on the canvas.
@@ -139,7 +142,7 @@
       else if (direction === "back") {
         // Finds the details corresponding to the current frame that is stored in the history.
         let currentFrameObject = history.find((item) => item.frameNumber === currentFrame);
-        console.log(history, currentFrame);
+
         // If the currentFrame is "divide", We simply need to remove the middle line that was drawn in this frame.
         if (currentFrameObject.type === "divide") {
           canvas.remove(currentFrameObject?.line);
@@ -173,7 +176,7 @@
             When reverting a "strip" frame, We have to remove the rectangle set the
             color of points back to black and radius to 5.
          */
-          console.log(currentFrameObject);
+
           canvas.remove(currentFrameObject.stripRegion);
           setAttributes(currentFrameObject.elements, {
             fill: "black",
@@ -197,10 +200,10 @@
           if (currentFrameObject.hasCloserPointsInStrip) {
             canvas.remove(currentFrameObject.line);
             canvas.add(currentFrameObject.longerLine.line);
-            console.log(currentFrameObject.longerLine);
+
             distanceBoxes = [...distanceBoxes, currentFrameObject.longerLine.box];
             distanceBoxes = distanceBoxes.filter((box) => box !== currentFrameObject.box);
-            console.log(currentDistanceLineObjects);
+
             currentDistanceLineObjects.push(currentFrameObject.longerLine);
           }
 
@@ -294,7 +297,6 @@
 
     // Angle at which the line is inclined.
     let theta = (Math.atan2(y2 - y1, x2 - x1) * 180) / Math.PI;
-    console.log(theta);
     let distanceBox = {
       left: midX,
       top: midY,
@@ -332,7 +334,6 @@
     --> Reverts the highlighted points to their original state.
   */
   async function comparisonVisualization({ frameNumber }, duration) {
-    console.log(currentDistanceLineObjects);
     let [firstLine, secondLine] = currentDistanceLineObjects.slice(-2);
 
     let line1 = firstLine.line;
@@ -349,7 +350,7 @@
     // Remove longer line
     if (distance1 > distance2) {
       canvas.remove(line1);
-      console.log(currentDistanceLineObjects);
+
       currentDistanceLineObjects = currentDistanceLineObjects.filter((item) => item.line !== line1);
 
       longerBox = distanceBoxes.find((box) => box.distanceLine === line1);
@@ -359,7 +360,7 @@
       distanceBoxes = distanceBoxes.filter((box) => box.distanceLine !== line1);
     } else {
       canvas.remove(line2);
-      console.log(currentDistanceLineObjects);
+
       currentDistanceLineObjects = currentDistanceLineObjects.filter((item) => item.line !== line2);
 
       longerBox = distanceBoxes.find((box) => box.distanceLine === line2);
@@ -421,7 +422,6 @@
 
     // Get line connecting closest pair from "compare" operation
     let [lineObject] = currentDistanceLineObjects.slice(-1);
-    console.log(lineObject);
     let stripClosestObject = {
       frameNumber,
       type: "stripClosest",
@@ -443,7 +443,7 @@
 
       // Angle at which the line is inclined.
       let theta = (Math.atan2(y2 - y1, x2 - x1) * 180) / Math.PI;
-      console.log(theta);
+
       let distanceBox = {
         left: midX,
         top: midY,
@@ -478,7 +478,7 @@
         box: distanceBox,
         stripRegion,
       };
-      console.log(frameNumber);
+
       currentDistanceLineObjects.push(stripObject);
 
       await animate(canvas, shorterLine, { x2: x2, y2: y2 }, duration);
@@ -620,18 +620,31 @@
     await sleep(duration);
     if (distanceBoxes[index]) distanceBoxes[index].visibility = "visible";
   }
+
+  var coordinatesVisible = true;
 </script>
 
 <div class="main-container">
   <div id=" title" class="title">
+    <div class="spacer" />
     <h1>Closest Pair Algorithm ( Divide and Conquer )</h1>
+    <div class="spacer" />
+    <span class="settings"
+      ><p>Display Co-ordinates</p>
+      <Toggle bind:checked={coordinatesVisible} /></span
+    >
   </div>
   <div class="canvas-box">
-    <Canvas on:createPoint={addPoints} on:canvas={setCanvas} {hasStarted} {points} />
+    <Canvas
+      on:createPoint={addPoints}
+      on:canvas={setCanvas}
+      {hasStarted}
+      {points}
+      {coordinatesVisible}
+    />
     <!-- Displays all distance boxes, iteratively -->
     {#each distanceBoxes as box}
       <div
-        draggable="true"
         class={box.visibility === "visible"
           ? "distance-container visibile"
           : "distance-container hidden"}
@@ -676,6 +689,21 @@
     justify-self: end;
   }
 
+  .settings {
+    cursor: pointer;
+
+    margin-right: 10px;
+
+    display: flex;
+    align-items: center;
+
+    p {
+      margin: 0 10px;
+    }
+  }
+  .spacer {
+    flex: 1 1 auto;
+  }
   .title {
     height: 75px;
     width: 100%;
@@ -695,7 +723,7 @@
   h1 {
     padding: 0 10px;
     font-size: 2rem;
-    font-family: cursive;
+    margin-right: 30px;
   }
   .distance-container {
     position: absolute;
@@ -723,5 +751,11 @@
 
     border: 1px solid #4f8ff0;
     box-shadow: 0 1px 5px #2961b5;
+  }
+
+  @media only screen and (max-width: 600px) {
+    h1 {
+      font-size: 1rem;
+    }
   }
 </style>
