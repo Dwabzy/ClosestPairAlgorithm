@@ -173,6 +173,7 @@
             When reverting a "strip" frame, We have to remove the rectangle set the
             color of points back to black and radius to 5.
          */
+          console.log(currentFrameObject);
           canvas.remove(currentFrameObject.stripRegion);
           setAttributes(currentFrameObject.elements, {
             fill: "black",
@@ -196,8 +197,10 @@
           if (currentFrameObject.hasCloserPointsInStrip) {
             canvas.remove(currentFrameObject.line);
             canvas.add(currentFrameObject.longerLine.line);
+            console.log(currentFrameObject.longerLine);
             distanceBoxes = [...distanceBoxes, currentFrameObject.longerLine.box];
             distanceBoxes = distanceBoxes.filter((box) => box !== currentFrameObject.box);
+            console.log(currentDistanceLineObjects);
             currentDistanceLineObjects.push(currentFrameObject.longerLine);
           }
 
@@ -329,6 +332,7 @@
     --> Reverts the highlighted points to their original state.
   */
   async function comparisonVisualization({ frameNumber }, duration) {
+    console.log(currentDistanceLineObjects);
     let [firstLine, secondLine] = currentDistanceLineObjects.slice(-2);
 
     let line1 = firstLine.line;
@@ -339,13 +343,13 @@
 
     // Highlight the lines that are being compared.
     setAttributes([line1, line2], { stroke: "orange", strokeWidth: 3 });
-    await sleep(duration);
 
     let longerBox, longerLine, longerDistance;
 
     // Remove longer line
     if (distance1 > distance2) {
       canvas.remove(line1);
+      console.log(currentDistanceLineObjects);
       currentDistanceLineObjects = currentDistanceLineObjects.filter((item) => item.line !== line1);
 
       longerBox = distanceBoxes.find((box) => box.distanceLine === line1);
@@ -355,6 +359,7 @@
       distanceBoxes = distanceBoxes.filter((box) => box.distanceLine !== line1);
     } else {
       canvas.remove(line2);
+      console.log(currentDistanceLineObjects);
       currentDistanceLineObjects = currentDistanceLineObjects.filter((item) => item.line !== line2);
 
       longerBox = distanceBoxes.find((box) => box.distanceLine === line2);
@@ -374,6 +379,7 @@
 
     history.push(comparisonObject);
 
+    await sleep(duration);
     // Revert the lines to their original state.
     setAttributes([line1, line2], { stroke: "black", strokeWidth: 1 });
   }
@@ -386,7 +392,7 @@
     stripRegion = createRectangle(x1, y1, 0, 0, "yellow", 0.5);
     canvas.add(stripRegion);
 
-    history.push({ frameNumber, type: "strip", elements });
+    history.push({ frameNumber, type: "strip", elements, stripRegion });
     await animate(canvas, stripRegion, { width: x2 - x1, height: y2 - y1 }, duration);
 
     setAttributes(elements, { fill: "red", radius: 6 });
@@ -415,6 +421,7 @@
 
     // Get line connecting closest pair from "compare" operation
     let [lineObject] = currentDistanceLineObjects.slice(-1);
+    console.log(lineObject);
     let stripClosestObject = {
       frameNumber,
       type: "stripClosest",
@@ -471,7 +478,7 @@
         box: distanceBox,
         stripRegion,
       };
-
+      console.log(frameNumber);
       currentDistanceLineObjects.push(stripObject);
 
       await animate(canvas, shorterLine, { x2: x2, y2: y2 }, duration);
@@ -695,7 +702,7 @@
     z-index: 20;
     opacity: 0.75;
 
-    transition: 0.5s;
+    transition: opacity 0.5s;
 
     &:hover {
       opacity: 1;

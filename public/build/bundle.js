@@ -34967,7 +34967,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (625:4) {#each distanceBoxes as box}
+    // (632:4) {#each distanceBoxes as box}
     function create_each_block(ctx) {
     	let div1;
     	let div0;
@@ -34982,18 +34982,18 @@ var app = (function () {
     			div0 = element("div");
     			t0 = text(t0_value);
     			t1 = space();
-    			attr_dev(div0, "class", "distance svelte-k4oz4l");
-    			add_location(div0, file, 632, 8, 24413);
+    			attr_dev(div0, "class", "distance svelte-10m57xa");
+    			add_location(div0, file, 639, 8, 24777);
     			attr_dev(div1, "draggable", "true");
 
     			attr_dev(div1, "class", div1_class_value = "" + (null_to_empty(/*box*/ ctx[34].visibility === "visible"
     			? "distance-container visibile"
-    			: "distance-container hidden") + " svelte-k4oz4l"));
+    			: "distance-container hidden") + " svelte-10m57xa"));
 
     			set_style(div1, "top", /*box*/ ctx[34].top + "px");
     			set_style(div1, "left", /*box*/ ctx[34].left - 40 + "px");
     			set_style(div1, "transform", "rotate(" + /*box*/ ctx[34].angle % 90 + "deg");
-    			add_location(div1, file, 625, 6, 24146);
+    			add_location(div1, file, 632, 6, 24510);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -35006,7 +35006,7 @@ var app = (function () {
 
     			if (dirty[0] & /*distanceBoxes*/ 1 && div1_class_value !== (div1_class_value = "" + (null_to_empty(/*box*/ ctx[34].visibility === "visible"
     			? "distance-container visibile"
-    			: "distance-container hidden") + " svelte-k4oz4l"))) {
+    			: "distance-container hidden") + " svelte-10m57xa"))) {
     				attr_dev(div1, "class", div1_class_value);
     			}
 
@@ -35031,7 +35031,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(625:4) {#each distanceBoxes as box}",
+    		source: "(632:4) {#each distanceBoxes as box}",
     		ctx
     	});
 
@@ -35103,17 +35103,17 @@ var app = (function () {
     			t3 = space();
     			div2 = element("div");
     			create_component(footer.$$.fragment);
-    			attr_dev(h1, "class", "svelte-k4oz4l");
-    			add_location(h1, file, 619, 4, 23876);
+    			attr_dev(h1, "class", "svelte-10m57xa");
+    			add_location(h1, file, 626, 4, 24240);
     			attr_dev(div0, "id", " title");
-    			attr_dev(div0, "class", "title svelte-k4oz4l");
-    			add_location(div0, file, 618, 2, 23840);
-    			attr_dev(div1, "class", "canvas-box svelte-k4oz4l");
-    			add_location(div1, file, 621, 2, 23942);
-    			attr_dev(div2, "class", "footer-container svelte-k4oz4l");
-    			add_location(div2, file, 638, 2, 24530);
-    			attr_dev(div3, "class", "main-container svelte-k4oz4l");
-    			add_location(div3, file, 617, 0, 23809);
+    			attr_dev(div0, "class", "title svelte-10m57xa");
+    			add_location(div0, file, 625, 2, 24204);
+    			attr_dev(div1, "class", "canvas-box svelte-10m57xa");
+    			add_location(div1, file, 628, 2, 24306);
+    			attr_dev(div2, "class", "footer-container svelte-10m57xa");
+    			add_location(div2, file, 645, 2, 24894);
+    			attr_dev(div3, "class", "main-container svelte-10m57xa");
+    			add_location(div3, file, 624, 0, 24173);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -35362,8 +35362,9 @@ var app = (function () {
       When reverting a "strip" frame, We have to remove the rectangle set the
       color of points back to black and radius to 5.
              */
-    					canvas.remove(currentFrameObject.stripRegion);
+    					console.log(currentFrameObject);
 
+    					canvas.remove(currentFrameObject.stripRegion);
     					setAttributes(currentFrameObject.elements, { fill: "black", radius: 5 });
     				} else if (currentFrameObject.type === "stripClosest") {
     					/* 
@@ -35381,8 +35382,10 @@ var app = (function () {
     					if (currentFrameObject.hasCloserPointsInStrip) {
     						canvas.remove(currentFrameObject.line);
     						canvas.add(currentFrameObject.longerLine.line);
+    						console.log(currentFrameObject.longerLine);
     						$$invalidate(0, distanceBoxes = [...distanceBoxes, currentFrameObject.longerLine.box]);
     						$$invalidate(0, distanceBoxes = distanceBoxes.filter(box => box !== currentFrameObject.box));
+    						console.log(currentDistanceLineObjects);
     						currentDistanceLineObjects.push(currentFrameObject.longerLine);
     					}
 
@@ -35521,6 +35524,7 @@ var app = (function () {
       --> Reverts the highlighted points to their original state.
     */
     	async function comparisonVisualization({ frameNumber }, duration) {
+    		console.log(currentDistanceLineObjects);
     		let [firstLine, secondLine] = currentDistanceLineObjects.slice(-2);
     		let line1 = firstLine.line;
     		let line2 = secondLine.line;
@@ -35530,12 +35534,12 @@ var app = (function () {
     		// Highlight the lines that are being compared.
     		setAttributes([line1, line2], { stroke: "orange", strokeWidth: 3 });
 
-    		await sleep(duration);
     		let longerBox, longerLine, longerDistance;
 
     		// Remove longer line
     		if (distance1 > distance2) {
     			canvas.remove(line1);
+    			console.log(currentDistanceLineObjects);
     			currentDistanceLineObjects = currentDistanceLineObjects.filter(item => item.line !== line1);
     			longerBox = distanceBoxes.find(box => box.distanceLine === line1);
     			longerLine = line1;
@@ -35543,6 +35547,7 @@ var app = (function () {
     			$$invalidate(0, distanceBoxes = distanceBoxes.filter(box => box.distanceLine !== line1));
     		} else {
     			canvas.remove(line2);
+    			console.log(currentDistanceLineObjects);
     			currentDistanceLineObjects = currentDistanceLineObjects.filter(item => item.line !== line2);
     			longerBox = distanceBoxes.find(box => box.distanceLine === line2);
     			longerLine = line2;
@@ -35559,6 +35564,7 @@ var app = (function () {
     		};
 
     		history.push(comparisonObject);
+    		await sleep(duration);
 
     		// Revert the lines to their original state.
     		setAttributes([line1, line2], { stroke: "black", strokeWidth: 1 });
@@ -35571,7 +35577,14 @@ var app = (function () {
     	async function stripVisualization({ frameNumber, x1, y1, x2, y2, elements }, duration) {
     		stripRegion = createRectangle(x1, y1, 0, 0, "yellow", 0.5);
     		canvas.add(stripRegion);
-    		history.push({ frameNumber, type: "strip", elements });
+
+    		history.push({
+    			frameNumber,
+    			type: "strip",
+    			elements,
+    			stripRegion
+    		});
+
     		await animate(canvas, stripRegion, { width: x2 - x1, height: y2 - y1 }, duration);
     		setAttributes(elements, { fill: "red", radius: 6 });
     		await sleep(duration);
@@ -35597,6 +35610,8 @@ var app = (function () {
 
     		// Get line connecting closest pair from "compare" operation
     		let [lineObject] = currentDistanceLineObjects.slice(-1);
+
+    		console.log(lineObject);
 
     		let stripClosestObject = {
     			frameNumber,
@@ -35658,6 +35673,7 @@ var app = (function () {
     				stripRegion
     			};
 
+    			console.log(frameNumber);
     			currentDistanceLineObjects.push(stripObject);
     			await animate(canvas, shorterLine, { x2, y2 }, duration);
     		} else {
