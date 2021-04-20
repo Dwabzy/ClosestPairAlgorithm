@@ -6,8 +6,10 @@
   /*
     --> "pointElements" is an array of Fabric circle objects corresponding to the points on the canvas.
     --> "pointCoordinates" stores the coordinates of the points on the canvas.
-
+  
     --> Both "pointElements" and "pointCoordinates" are used in the algorithm to find the closest pair.
+
+    --> "points" is an array of graph coordinates that displays a rectangle next to the point to identify it's position in the graph. It is sent as props to Canvas.svelte
 
     --> "frames" is an array of javascript objects that are used to visualize the algorithm. They are obtained after the closest pair algorithm is 
       executed.
@@ -16,6 +18,7 @@
   */
   let pointElements = [];
   let pointsCoordinates = [];
+  let points = [];
   let frames = [];
   var canvas;
 
@@ -30,7 +33,7 @@
   // Called when the "createPoint" event is dispatched from Canvas.svelte. Checks for duplicates before adding the coordinates and Fabric object
   // to their respective arrays.
   function addPoints(event) {
-    let { coordinates, element } = event.detail;
+    let { coordinates, element, graphCoordinates } = event.detail;
 
     // Check For duplicate point, So that there are no 2 points in same coordinates resulting in a shortest distance of 0.
     let duplicatePoint = pointsCoordinates.find(
@@ -39,6 +42,7 @@
     if (!duplicatePoint) {
       pointElements = [...pointElements, element];
       pointsCoordinates = [...pointsCoordinates, coordinates];
+      points = [...points, graphCoordinates];
     }
   }
 
@@ -279,18 +283,22 @@
     setAttributes(elements, { fill: "blue", radius: 6 });
 
     // Add line to canvas.
-    let distanceLine = createLine(x1, y1 + 2.5, x1, y1 + 2.5, "black", 1);
+    let distanceLine = createLine(x1, y1, x1, y1, "black", 1);
     canvas.add(distanceLine);
     // Add Distance Box
     let midX = (x1 + x2) / 2;
     let midY = (y1 + y2) / 2;
-    console.log(p1, p2);
+
+    // Angle at which the line is inclined.
+    let theta = (Math.atan2(y2 - y1, x2 - x1) * 180) / Math.PI;
+    console.log(theta);
     let distanceBox = {
       left: midX,
       top: midY,
       distance,
       frameNumber,
       distanceLine,
+      angle: theta,
       visibility: "hidden",
     };
     distanceBoxes = [...distanceBoxes, distanceBox];
@@ -308,7 +316,7 @@
     history.push(bruteForceObject);
 
     await sleep(duration / 2);
-    await animate(canvas, distanceLine, { x2: x2, y2: y2 + 2.5 }, duration / 2);
+    await animate(canvas, distanceLine, { x2: x2, y2: y2 }, duration / 2);
 
     // Revert highlighted points to original state.
     setAttributes(elements, { fill: "black", radius: 5 });
@@ -419,18 +427,23 @@
 
     if (hasCloserPointsInStrip) {
       // Add shorter line
-      let shorterLine = createLine(x1, y1 + 2.5, x1, y1 + 2.5, "black", 1);
+      let shorterLine = createLine(x1, y1, x1, y1, "black", 1);
       canvas.add(shorterLine);
 
       // Add distance box for shorter line
       let midX = (x1 + x2) / 2;
       let midY = (y1 + y2) / 2;
+
+      // Angle at which the line is inclined.
+      let theta = (Math.atan2(y2 - y1, x2 - x1) * 180) / Math.PI;
+      console.log(theta);
       let distanceBox = {
         left: midX,
         top: midY,
         distance,
         frameNumber,
         distanceLine: shorterLine,
+        angle: theta,
         visibility: "hidden",
       };
       distanceBoxes = [...distanceBoxes, distanceBox];
@@ -461,7 +474,7 @@
 
       currentDistanceLineObjects.push(stripObject);
 
-      await animate(canvas, shorterLine, { x2: x2, y2: y2 + 2.5 }, duration);
+      await animate(canvas, shorterLine, { x2: x2, y2: y2 }, duration);
     } else {
       history.push(stripClosestObject);
     }
@@ -521,6 +534,8 @@
 
     pointElements = [];
     pointsCoordinates = [];
+    points = [];
+
     history = [];
     distanceBoxes = [];
     currentDistanceLineObjects = [];
@@ -605,18 +620,18 @@
     <h1>Closest Pair Algorithm ( Divide and Conquer )</h1>
   </div>
   <div class="canvas-box">
-    <Canvas on:createPoint={addPoints} on:canvas={setCanvas} {hasStarted} />
+    <Canvas on:createPoint={addPoints} on:canvas={setCanvas} {hasStarted} {points} />
     <!-- Displays all distance boxes, iteratively -->
-    {#each distanceBoxes as distanceBox}
+    {#each distanceBoxes as box}
       <div
         draggable="true"
-        class={distanceBox.visibility === "visible"
+        class={box.visibility === "visible"
           ? "distance-container visibile"
           : "distance-container hidden"}
-        style="top:{distanceBox.top + 10 + 'px'}; left:{distanceBox.left + 'px'};"
+        style="top:{box.top}px; left:{box.left - 40}px;transform: rotate({box.angle % 90}deg"
       >
         <div class="distance">
-          {(distanceBox.distance / 10).toFixed(2)}
+          {(box.distance / 10).toFixed(2)}
         </div>
       </div>
     {/each}
@@ -677,6 +692,15 @@
   }
   .distance-container {
     position: absolute;
+    z-index: 20;
+    opacity: 0.75;
+
+    transition: 0.5s;
+
+    &:hover {
+      opacity: 1;
+      z-index: 100;
+    }
   }
 
   .distance {
@@ -692,7 +716,5 @@
 
     border: 1px solid #4f8ff0;
     box-shadow: 0 1px 5px #2961b5;
-
-    z-index: 50;
   }
 </style>

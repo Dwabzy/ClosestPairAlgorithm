@@ -98,15 +98,17 @@
       let top = boundingRectangle.top;
       let y = Math.ceil(options.e.clientY - (options.e.clientY % 10) - (top - (top % 10)) - 5);
 
-      console.log(x, y);
-      createPoint(x, y);
+      let graphX = (x - 5) / 10;
+      let graphY = (canvasHeight + 5 - y) / 10;
+      createPoint(x, y, graphX, graphY);
     });
   });
 
-  function createPoint(x, y) {
-    if (!hasStarted && x > 0 && y < canvasHeight) {
+  // Points are used to display the coordinates of each point on the canvas reactively whenever they are created (There is a "for each" loop in html part of this component)
+  export let points = [];
+  function createPoint(x, y, graphX, graphY) {
+    if (!hasStarted && x > 0 && y <= canvasHeight + 5) {
       // Check to see if point already exists.
-
       var point = new fabric.Circle({
         radius: 5,
         fill: "black",
@@ -119,13 +121,29 @@
 
       // Add point to DOM and to the list of Point Elements
       canvas.add(point);
-      dispatch("createPoint", { coordinates: { x, y }, element: point });
+      dispatch("createPoint", {
+        coordinates: { x, y },
+        element: point,
+        graphCoordinates: { x, y, graphX, graphY },
+      });
     }
   }
 </script>
 
 <canvas bind:this={canv} width="500" height="300"> Hello </canvas>
+{#each points as point}
+  <div
+    draggable="true"
+    class="coordinates-container"
+    style="top:{point.y + 5}px; left:{point.x - 20}px;"
+  >
+    <div class="coordinates">
+      ({point.graphX},{point.graphY})
+    </div>
+  </div>
+{/each}
 
+<!-- Graph Rulings, Both Vertical and Horizontal. -->
 {#each verticalRuling as ruling}
   <span class="number" style="top:{ruling.top}px; left:{ruling.left}px;">{ruling.number}</span>
 {/each}
@@ -135,7 +153,38 @@
   >
 {/each}
 
-<style>
+<style type="text/scss">
+  .coordinates-container {
+    position: absolute;
+    z-index: 20;
+    opacity: 0.75;
+    transition: 0.5s;
+
+    &:hover {
+      opacity: 1;
+      z-index: 100;
+    }
+  }
+
+  .coordinates {
+    position: relative;
+
+    height: 30px;
+    width: 40px;
+    background-color: white;
+    padding: 0 3px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid hsl(253, 79%, 63%);
+    box-shadow: 0 1px 5px hsl(253, 100%, 49%);
+    border-radius: 5px;
+
+    font-size: 0.85rem;
+  }
+
   .number {
     position: absolute;
     font-size: 16px;
