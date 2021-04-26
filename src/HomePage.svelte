@@ -4,11 +4,12 @@
         <h1>RMK Engineering College Kavaraipettai</h1>
         <h1>Department of Information Technology</h1>
         <h4>
-            Developed By: J.S. Pragadeesh 2nd Year Department of Information
+            Developed By: J.S. Pragadeesh, Maaz Hussain 2nd Year Department of Information
             Technology
         </h4>
+        
         <h4>
-            Mentored By: Prathyusha Laxmi Assistant Professor Department of
+            Mentored By: Prathusha Laxmi Assistant Professor Department of
             Information Technology
         </h4>
         <div class="button-field">
