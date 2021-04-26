@@ -54,13 +54,13 @@
         font-size: 1rem;
         color: rgb(11, 150, 108);
     }
-    .button-field{
+    .button-field {
         margin-bottom: 30px;
     }
     .button {
         width: 20px;
         padding: 10px;
-        border: 2px solid gray;
+        border: 2px solid rgb(191, 191, 191);
         background: rgb(253, 193, 193);
         color: rgb(0, 0, 0);
     }
@@ -68,7 +68,7 @@
         width: 80px;
         cursor: pointer;
         padding: 10px;
-        border: 2px solid gray;
+        border: 2px solid rgb(191, 191, 191);
         background: rgb(253, 193, 193);
         color: rgb(0, 0, 0);
     }
