@@ -11,7 +11,7 @@
             Mentored By: Prathyusha Laxmi Assistant Professor Department of
             Information Technology
         </h4>
-        <div>
+        <div class="button-field">
             <a class="buttons" href="/demo">Demo</a>
             <a class="button" href="/simulation">Simulator</a>
         </div>
@@ -54,19 +54,22 @@
         font-size: 1rem;
         color: rgb(11, 150, 108);
     }
+    .button-field{
+        margin-bottom: 30px;
+    }
     .button {
         width: 20px;
         padding: 10px;
         border: 2px solid gray;
-        background: rgb(175, 171, 171);
-        color: rgb(255, 0, 0);
+        background: rgb(253, 193, 193);
+        color: rgb(0, 0, 0);
     }
     .buttons {
         width: 80px;
         cursor: pointer;
         padding: 10px;
         border: 2px solid gray;
-        background: rgb(175, 171, 171);
-        color: rgb(133, 97, 97);
+        background: rgb(253, 193, 193);
+        color: rgb(0, 0, 0);
     }
 </style>

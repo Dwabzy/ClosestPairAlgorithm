@@ -7,7 +7,7 @@
 <div class="main-containers">
     <div id=" titles" class="titles">
         <h1>Demo Video of Closest Pair Algorithm ( Divide and Conquer )</h1>
-        <Youtube videoId="M7lc1UVf-VE" />
+        <Youtube videoId="V1qnXiWJlB8" />
     </div>
 </div>
 
