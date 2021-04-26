@@ -22,6 +22,7 @@
   "dependencies": {
     "fabric": "^4.4.0",
     "fabric-with-gestures": "^4.4.0",
+    "page": "^1.11.6",
     "sirv-cli": "^1.0.0"
   }
 }
