@@ -4,7 +4,7 @@
         <h1>RMK Engineering College Kavaraipettai</h1>
         <h1>Department of Information Technology</h1>
         <h4>
-            Developed By: J.S. Pragadeesh, Maaz Hussain 2nd Year Department of Information
+            Developed By: Maaz Hussain, Pragadeesh J S, 2nd Year Department of Information
             Technology
         </h4>
         
