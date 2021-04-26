@@ -9,7 +9,7 @@
         </h4>
         
         <h4>
-            Mentored By: Prathusha Laxmi Assistant Professor Department of
+            Mentored By: Dr. Prathusha Laxmi B, Assistant Professor, Department of
             Information Technology
         </h4>
         <div class="button-field">
