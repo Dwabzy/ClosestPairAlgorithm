@@ -1,7 +1,9 @@
 <script>
-    let player1, player2;
-    let player1State, player2State;
     import Youtube from "./Youtube.svelte";
+    if(window.location.hash != '#r') {
+        window.location.hash = 'r';
+        window.location.reload(1);
+    }
 </script>
 
 <div class="main-containers">

@@ -37372,13 +37372,14 @@ var app = (function () {
     const file$3 = "src\\HomePage.svelte";
 
     function create_fragment$3(ctx) {
+    	let div3;
     	let div2;
     	let div1;
-    	let h10;
+    	let h1;
     	let t1;
-    	let h11;
+    	let h20;
     	let t3;
-    	let h12;
+    	let h21;
     	let t5;
     	let h40;
     	let t7;
@@ -37391,22 +37392,23 @@ var app = (function () {
 
     	const block = {
     		c: function create() {
+    			div3 = element("div");
     			div2 = element("div");
     			div1 = element("div");
-    			h10 = element("h1");
-    			h10.textContent = "Closest Pair Algorithm ( Divide and Conquer )";
+    			h1 = element("h1");
+    			h1.textContent = "Closest Pair Algorithm ( Divide and Conquer )";
     			t1 = space();
-    			h11 = element("h1");
-    			h11.textContent = "RMK Engineering College Kavaraipettai";
+    			h20 = element("h2");
+    			h20.textContent = "RMK Engineering College Kavaraipettai";
     			t3 = space();
-    			h12 = element("h1");
-    			h12.textContent = "Department of Information Technology";
+    			h21 = element("h2");
+    			h21.textContent = "Department of Information Technology";
     			t5 = space();
     			h40 = element("h4");
-    			h40.textContent = "Developed By: J.S. Pragadeesh 2nd Year Department of Information\r\n            Technology";
+    			h40.textContent = "Developed By: Maaz Hussain, Pragadeesh J S, 2nd Year, Department\r\n                of Information Technology";
     			t7 = space();
     			h41 = element("h4");
-    			h41.textContent = "Mentored By: Prathyusha Laxmi Assistant Professor Department of\r\n            Information Technology";
+    			h41.textContent = "Mentored By: Dr. Prathusha Laxmi B, Associate Professor,\r\n                Department of Information Technology";
     			t9 = space();
     			div0 = element("div");
     			a0 = element("a");
@@ -37414,40 +37416,44 @@ var app = (function () {
     			t11 = space();
     			a1 = element("a");
     			a1.textContent = "Simulator";
-    			attr_dev(h10, "class", "svelte-ttbo6l");
-    			add_location(h10, file$3, 2, 8, 78);
-    			attr_dev(h11, "class", "svelte-ttbo6l");
-    			add_location(h11, file$3, 3, 8, 142);
-    			attr_dev(h12, "class", "svelte-ttbo6l");
-    			add_location(h12, file$3, 4, 8, 198);
-    			attr_dev(h40, "class", "svelte-ttbo6l");
-    			add_location(h40, file$3, 5, 8, 253);
-    			attr_dev(h41, "class", "svelte-ttbo6l");
-    			add_location(h41, file$3, 9, 8, 384);
-    			attr_dev(a0, "class", "buttons svelte-ttbo6l");
+    			attr_dev(h1, "class", "svelte-jlp7cu");
+    			add_location(h1, file$3, 3, 12, 114);
+    			attr_dev(h20, "class", "svelte-jlp7cu");
+    			add_location(h20, file$3, 4, 12, 182);
+    			attr_dev(h21, "class", "svelte-jlp7cu");
+    			add_location(h21, file$3, 5, 12, 242);
+    			attr_dev(h40, "class", "svelte-jlp7cu");
+    			add_location(h40, file$3, 6, 12, 301);
+    			attr_dev(h41, "class", "svelte-jlp7cu");
+    			add_location(h41, file$3, 11, 12, 465);
+    			attr_dev(a0, "class", "button svelte-jlp7cu");
     			attr_dev(a0, "href", "/demo");
-    			add_location(a0, file$3, 14, 12, 545);
-    			attr_dev(a1, "class", "button svelte-ttbo6l");
+    			add_location(a0, file$3, 16, 16, 674);
+    			attr_dev(a1, "class", "button svelte-jlp7cu");
     			attr_dev(a1, "href", "/simulation");
-    			add_location(a1, file$3, 15, 12, 599);
-    			add_location(div0, file$3, 13, 8, 526);
+    			add_location(a1, file$3, 17, 16, 731);
+    			attr_dev(div0, "class", "button-field svelte-jlp7cu");
+    			add_location(div0, file$3, 15, 12, 630);
     			attr_dev(div1, "id", " titles");
-    			attr_dev(div1, "class", "titles svelte-ttbo6l");
-    			add_location(div1, file$3, 1, 4, 35);
-    			attr_dev(div2, "class", "main-containers svelte-ttbo6l");
-    			add_location(div2, file$3, 0, 0, 0);
+    			attr_dev(div1, "class", "titles svelte-jlp7cu");
+    			add_location(div1, file$3, 2, 8, 67);
+    			attr_dev(div2, "class", "main-containers svelte-jlp7cu");
+    			add_location(div2, file$3, 1, 4, 28);
+    			attr_dev(div3, "class", "backgrnd svelte-jlp7cu");
+    			add_location(div3, file$3, 0, 0, 0);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div2, anchor);
+    			insert_dev(target, div3, anchor);
+    			append_dev(div3, div2);
     			append_dev(div2, div1);
-    			append_dev(div1, h10);
+    			append_dev(div1, h1);
     			append_dev(div1, t1);
-    			append_dev(div1, h11);
+    			append_dev(div1, h20);
     			append_dev(div1, t3);
-    			append_dev(div1, h12);
+    			append_dev(div1, h21);
     			append_dev(div1, t5);
     			append_dev(div1, h40);
     			append_dev(div1, t7);
@@ -37462,7 +37468,7 @@ var app = (function () {
     		i: noop,
     		o: noop,
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div2);
+    			if (detaching) detach_dev(div3);
     		}
     	};
 
@@ -37709,7 +37715,7 @@ var app = (function () {
     	let current;
 
     	youtube = new Youtube({
-    			props: { videoId: "M7lc1UVf-VE" },
+    			props: { videoId: "V1qnXiWJlB8" },
     			$$inline: true
     		});
 
@@ -37722,12 +37728,12 @@ var app = (function () {
     			t1 = space();
     			create_component(youtube.$$.fragment);
     			attr_dev(h1, "class", "svelte-1w6m7vr");
-    			add_location(h1, file$1, 8, 8, 210);
+    			add_location(h1, file$1, 10, 8, 266);
     			attr_dev(div0, "id", " titles");
     			attr_dev(div0, "class", "titles svelte-1w6m7vr");
-    			add_location(div0, file$1, 7, 4, 167);
+    			add_location(div0, file$1, 9, 4, 223);
     			attr_dev(div1, "class", "main-containers svelte-1w6m7vr");
-    			add_location(div1, file$1, 6, 0, 132);
+    			add_location(div1, file$1, 8, 0, 188);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -37770,33 +37776,19 @@ var app = (function () {
     function instance$1($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots("Demo", slots, []);
-    	let player1, player2;
-    	let player1State, player2State;
+
+    	if (window.location.hash != "#r") {
+    		window.location.hash = "r";
+    		window.location.reload(1);
+    	}
+
     	const writable_props = [];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Demo> was created with unknown prop '${key}'`);
     	});
 
-    	$$self.$capture_state = () => ({
-    		player1,
-    		player2,
-    		player1State,
-    		player2State,
-    		Youtube
-    	});
-
-    	$$self.$inject_state = $$props => {
-    		if ("player1" in $$props) player1 = $$props.player1;
-    		if ("player2" in $$props) player2 = $$props.player2;
-    		if ("player1State" in $$props) player1State = $$props.player1State;
-    		if ("player2State" in $$props) player2State = $$props.player2State;
-    	};
-
-    	if ($$props && "$$inject" in $$props) {
-    		$$self.$inject_state($$props.$$inject);
-    	}
-
+    	$$self.$capture_state = () => ({ Youtube });
     	return [];
     }
 
